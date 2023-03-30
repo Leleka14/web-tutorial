@@ -1,0 +1,21 @@
+.button {
+  width: 236px;
+  height: 68px;
+
+  background: $accent;
+  box-shadow: 0px 10px 30px rgba(183, 50, 39, 0.2);
+  border-radius: 30px;
+  color: #fff;
+
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0.1px;
+  transition: background-color 0.1s linear;
+
+  &:hover {
+    background-color: $accent-color-hover;
+  }
+
+}
