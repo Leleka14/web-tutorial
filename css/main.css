@@ -161,4 +161,12 @@ legend {
 .defaultClass {
   padding-top: 50px;
 }
+
+.color_red {
+  color: red;
+}
+
+.color_blue {
+  color: #001aff;
+}
 /*# sourceMappingURL=main.css.map */
