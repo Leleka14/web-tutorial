@@ -18,6 +18,23 @@
   letter-spacing: 0.2px;
 }
 
+// .button {
+//   width: 100px;
+//   height: 50px;
+
+//   background: $accent;
+//   box-shadow: 0px 10px 30px rgba(183, 50, 39, 0.2);
+//   border-radius: 30px;
+//   color: #fff;
+
+//   font-family: Montserrat;
+//   font-size: 24px;
+//   font-weight: 700;
+//   line-height: 36px;
+
+
+// }
+
 .defaultClass {
   padding-top: 50px;
 }
@@ -28,4 +45,11 @@
 
 .color_blue {
   color: rgb(0, 26, 255);
+}
+
+input[type="text"] {
+
+  padding: 12px 20px;
+ 
+
 }
