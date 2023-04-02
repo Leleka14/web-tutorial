@@ -11,7 +11,7 @@ const myFunction = () => {
   if (message.length >= 5 && message.length <= 20) {
     const createdDiv = document.createElement("div");
     createdDiv.className = "color_red";
-    createdDiv.textContent = message;
+    createdDiv.innerHTML = `<div>${message}</div>` ;
     myDefaultId.appendChild(createdDiv);
   }
   if (message.length > 20) {
