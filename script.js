@@ -20,7 +20,7 @@ const myFunction = () => {
     createdDiv.textContent = message;
     myDefaultId.appendChild(createdDiv);
   }
-
+console.log('change')
   // if(myDefaultId.textContent === 'Hello World!' )
   // myDefaultId.textContent = message
   // else myDefaultId.textContent = message
