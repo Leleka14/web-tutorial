@@ -29,6 +29,10 @@ function resultMessage(event ){
         createdMessage.className = 'message' //додаємо клас 'massage' 
         createdMessage.id = `message-${oldMessages.length + 1}`   //додаємо клас 'id'
 
+        createdText.className = 'messageText'
+        createdText.id = `messageText-${oldMessages.length + 1}`
+
+
         createdMessage.appendChild(editButton)
         createdMessage.appendChild(deleteButton)
 
@@ -59,7 +63,7 @@ function deleteRow(e) {
 function editRow(e){
   const editMessage = prompt("Введіть зміни!")
   console.log(editMessage)
- const messageToEdit = document.querySelector(`#message-${e.target.id}`)
+ const messageToEdit = document.querySelector(`#messageText-${e.target.id}`)
  
  messageToEdit.innerHTML = editMessage
  // createdMessage.textContent = editMessage
