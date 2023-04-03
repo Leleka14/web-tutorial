@@ -13,22 +13,30 @@ function resultMessage(event ){
         let oldMessages = document.querySelectorAll('.message');
         console.log('oldMessages',oldMessages)
         const createdMessage = document.createElement("div");
+
+        const createdText = document.createElement("h2");
         const editButton = document.createElement('button')
         const deleteButton = document.createElement('button')
-        createdMessage.textContent = resultInput.value
+
+        createdText.textContent = resultInput.value
+       // createdMessage.textContent = resultInput.value
         editButton.textContent = 'Edit'
         deleteButton.textContent = 'Delete'
+
         deleteButton.id = oldMessages.length + 1
         editButton.id = oldMessages.length + 1 
-        createdMessage.className = 'message'
-        createdMessage.id = `message-${oldMessages.length + 1}`
+
+        createdMessage.className = 'message' //додаємо клас 'massage' 
+        createdMessage.id = `message-${oldMessages.length + 1}`   //додаємо клас 'id'
+
         createdMessage.appendChild(editButton)
         createdMessage.appendChild(deleteButton)
-        deleteButton.addEventListener('click', (e)=>{  
-            const messageToDelete = document.querySelector(`#message-${e.target.id}`)
-            console.log('messageToDelete', messageToDelete)
-            messages.removeChild(messageToDelete)
-        })
+
+        createdMessage.appendChild(createdText)
+
+        deleteButton.addEventListener('click',deleteRow )
+        editButton.addEventListener('click',editRow )
+
         messages.appendChild(createdMessage)
     }
 }
@@ -38,8 +46,23 @@ function resultMessage(event ){
   
  
 
-function deleteRow() {
+function deleteRow(e) {
     console.log('delete')
+  //  (e)=>{  
+      const messageToDelete = document.querySelector(`#message-${e.target.id}`)
+      console.log('messageToDelete', messageToDelete)
+      messages.removeChild(messageToDelete)
+    
+ // }
+}
+
+function editRow(e){
+  const editMessage = prompt("Введіть зміни!")
+  console.log(editMessage)
+ const messageToEdit = document.querySelector(`#message-${e.target.id}`)
+ 
+ messageToEdit.innerHTML = editMessage
+ // createdMessage.textContent = editMessage
 }
 
 
