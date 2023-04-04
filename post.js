@@ -1,6 +1,24 @@
-let getPostButton = document.querySelector("button");
+let getPostButton = document.querySelector(".getbutton");
+let getPostNextBotton = document.querySelector(".nextBotton")
+let getpreviousNextBotton = document.querySelector(".previousBotton")
 let posts = document.querySelector(".posts");
-const url = "https://jsonplaceholder.typicode.com/posts";
+const url = "https://jsonplaceholder.typicode.com/posts/";
+
+
+
+getPostNextBotton.addEventListener("click", (e) => resultPostNext(e));
+
+function resultPostNext(event) {
+  let num = 2;
+  let urlNum = url + num;
+  console.log(urlNum)
+
+  fetch(urlNum)
+  .then((response) => response.json())
+   .then((json) => console.log(json))
+
+}
+
 
 getPostButton.addEventListener("click", (e) => resultPosts(e));
 
@@ -14,7 +32,7 @@ function resultPosts(event) {
     //   //console.log(json[2])
     // });
 
-    .then((json) => {
+     .then((json) => {
       for (const post of json) {
         // const listItem = document.createElement("li");
 
@@ -36,6 +54,8 @@ function resultPosts(event) {
 
         posts.appendChild(createdPost);
       }
+
+
     });
 
   function deleteRow(e) {
