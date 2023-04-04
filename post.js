@@ -14,36 +14,49 @@ function resultPosts(event) {
     //   //console.log(json[2])
     // });
 
-
     .then((json) => {
       for (const post of json) {
-       // const listItem = document.createElement("li");
+        // const listItem = document.createElement("li");
 
-   const createdPost = document.createElement("div");
-     const createdTitle = document.createElement("h1");
-     const createdText = document.createElement("h2");
+        const createdPost = document.createElement("div");
+        const createdTitle = document.createElement("h1");
+        const createdText = document.createElement("h2");
+        const deleteButtonPost = document.createElement("button");
 
+        deleteButtonPost.className = "button buttonDel";
+        deleteButtonPost.textContent = "Delete";
 
-     createdPost.appendChild(createdTitle).textContent = post.title;
-        createdPost.appendChild(createdText).textContent = post.body
+        deleteButtonPost.id = post.id;
+        createdPost.id = `post-${post.id}`;
+        createdPost.appendChild(createdTitle).textContent = post.title;
+        createdPost.appendChild(createdText).textContent = post.body;
+        createdPost.appendChild(deleteButtonPost);
+
+        deleteButtonPost.addEventListener("click", deleteRow);
+
         posts.appendChild(createdPost);
       }
-    })
+    });
 
+  function deleteRow(e) {
+    console.log("delete");
+    const postToDelete = document.querySelector(`#post-${e.target.id}`);
+    //  const postToDelete = document.querySelector(`#post-${post.id}`);
+    console.log("messageToDelete", postToDelete);
+    posts.removeChild(postToDelete);
   }
+}
 
 
+//.catch(error => console.log(error))
 
-  //.catch(error => console.log(error))
-
-  //   const getData = (url) =>
-  //   new Promise ((resolve, reject) =>
-  //     fetch(url)
-  //       .then(response => response.json())
-  //       .then(json => resolve(json))
-  //       .catch(error => reject(error))
-  //   )
-
+//   const getData = (url) =>
+//   new Promise ((resolve, reject) =>
+//     fetch(url)
+//       .then(response => response.json())
+//       .then(json => resolve(json))
+//       .catch(error => reject(error))
+//   )
 
 // let getPostButton = document.querySelector("button");
 
