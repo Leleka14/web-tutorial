@@ -1,4 +1,5 @@
 let getPostButton = document.querySelector("button");
+let posts = document.querySelector(".posts");
 const url = "https://jsonplaceholder.typicode.com/posts";
 
 getPostButton.addEventListener("click", (e) => resultPosts(e));
@@ -6,13 +7,30 @@ getPostButton.addEventListener("click", (e) => resultPosts(e));
 function resultPosts(event) {
   fetch(url)
     .then((response) => response.json())
+    // .then((json) => {
+    // //   response = json;
+    // //   console.log(response);
+    //   console.log(json);
+    //   //console.log(json[2])
+    // });
+
+
     .then((json) => {
-    //   response = json;
-    //   console.log(response);
-      console.log(json);
-    });
+      for (const post of json) {
+       // const listItem = document.createElement("li");
+
+   const createdPost = document.createElement("div");
+     const createdTitle = document.createElement("h1");
+     const createdText = document.createElement("h2");
 
 
+     createdPost.appendChild(createdTitle).textContent = post.title;
+        createdPost.appendChild(createdText).textContent = post.body
+        posts.appendChild(createdPost);
+      }
+    })
+
+  }
 
 
 
@@ -25,7 +43,7 @@ function resultPosts(event) {
   //       .then(json => resolve(json))
   //       .catch(error => reject(error))
   //   )
-}
+
 
 // let getPostButton = document.querySelector("button");
 
