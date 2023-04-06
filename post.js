@@ -4,17 +4,38 @@ let getpreviousNextBotton = document.querySelector(".previousBotton");
 let getTitlePost = document.querySelector(".titlePost");
 let getTextPost = document.querySelector(".textPost");
 let getIdPost = document.querySelector(".idPost");
-//let posts = document.querySelector(".posts");
+let posts = document.querySelector(".posts");
 const url = "https://jsonplaceholder.typicode.com/posts/";
+const spinner = document.querySelector("#spinner")
+
 
 getPostNextBotton.addEventListener("click", (e) => resultPostNext(e));
 getpreviousNextBotton.addEventListener("click", (e) => resultPostPrevious(e));
 
 let num = 10;
 function resultPostNext(event) {
+  spinner.removeAttribute('hidden');
+  num++;
   let urlNum = url + num;
   console.log(urlNum);
-  num++;
+
+  fetch(urlNum)
+    .then((response) => response.json())
+    .then((json) => {
+      spinner.setAttribute('hidden', '');
+      getTitlePost.textContent = json.title;
+      getTextPost.textContent = json.body;
+      getIdPost.textContent = json.id;
+     
+    });
+}
+resultPostNext();
+
+function resultPostPrevious(event) {
+  num--;
+  let urlNum = url + num;
+  console.log(urlNum);
+
   fetch(urlNum)
   
     .then((response) => response.json())
@@ -22,26 +43,19 @@ function resultPostNext(event) {
       getTitlePost.textContent = json.title;
       getTextPost.textContent = json.body;
       getIdPost.textContent = json.id;
-     
     });
- 
 }
-resultPostNext();
 
-function resultPostPrevious(event) {
-  let urlNum = url + num;
-  console.log(urlNum);
-  num--;
-  fetch(urlNum)
-    .then((response) => response.json())
-    .then((json) => {
-      getTitlePost.textContent = json.title;
-      getTextPost.textContent = json.body;
-      getIdPost.textContent = json.id;
-     
-    });
 
-}
+// function displayLoading() {
+//   getShowOutput.textContent = 'hjkdsfh'
+//  console.log(getShowOutput)
+// }
+
+
+
+
+
 
 // getPostButton.addEventListener("click", (e) => resultPosts(e));
 
@@ -80,13 +94,17 @@ function resultPostPrevious(event) {
 //     });
 // }
 
-function deleteRow(e) {
-  console.log("delete");
-  const postToDelete = document.querySelector(`#post-${e.target.id}`);
-  //  const postToDelete = document.querySelector(`#post-${post.id}`);
-  console.log("messageToDelete", postToDelete);
-  posts.removeChild(postToDelete);
-}
+
+
+// function deleteRow(e) {
+//   console.log("delete");
+//   const postToDelete = document.querySelector(`#post-${e.target.id}`);
+//   //  const postToDelete = document.querySelector(`#post-${post.id}`);
+//   console.log("messageToDelete", postToDelete);
+//   posts.removeChild(postToDelete);
+// }
+
+
 
 //.catch(error => console.log(error))
 
