@@ -1,7 +1,10 @@
 let getPostButton = document.querySelector(".getbutton");
 let getPostNextBotton = document.querySelector(".nextBotton");
 let getpreviousNextBotton = document.querySelector(".previousBotton");
-let posts = document.querySelector(".posts");
+let getTitlePost = document.querySelector(".titlePost");
+let getTextPost = document.querySelector(".textPost");
+let getIdPost = document.querySelector(".idPost");
+//let posts = document.querySelector(".posts");
 const url = "https://jsonplaceholder.typicode.com/posts/";
 
 getPostNextBotton.addEventListener("click", (e) => resultPostNext(e));
@@ -15,19 +18,13 @@ function resultPostNext(event) {
   fetch(urlNum)
     .then((response) => response.json())
     .then((json) => {
-      const createdPost = document.createElement("div");
-      const createdTitle = document.createElement("h1");
-      const createdText = document.createElement("h2");
-
-      createdPost.appendChild(createdTitle).textContent = json.title;
-      createdPost.appendChild(createdText).textContent = json.body;
-
-      posts.appendChild(createdPost);
+      getTitlePost.textContent = json.title;
+      getTextPost.textContent = json.body;
+      getIdPost.textContent = json.id;
     });
   num++;
 }
 resultPostNext();
-
 
 function resultPostPrevious(event) {
   let urlNum = url + num;
@@ -36,21 +33,12 @@ function resultPostPrevious(event) {
   fetch(urlNum)
     .then((response) => response.json())
     .then((json) => {
-      const createdPost = document.createElement("div");
-      const createdTitle = document.createElement("h1");
-      const createdText = document.createElement("h2");
-
-      createdPost.appendChild(createdTitle).textContent = json.title;
-      createdPost.appendChild(createdText).textContent = json.body;
-
-      posts.appendChild(createdPost);
+      getTitlePost.textContent = json.title;
+      getTextPost.textContent = json.body;
+      getIdPost.textContent = json.id;
     });
   num--;
 }
-
-
-
-
 
 // getPostButton.addEventListener("click", (e) => resultPosts(e));
 
