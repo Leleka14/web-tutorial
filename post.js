@@ -14,30 +14,33 @@ let num = 10;
 function resultPostNext(event) {
   let urlNum = url + num;
   console.log(urlNum);
-
+  num++;
   fetch(urlNum)
+  
     .then((response) => response.json())
     .then((json) => {
       getTitlePost.textContent = json.title;
       getTextPost.textContent = json.body;
       getIdPost.textContent = json.id;
+     
     });
-  num++;
+ 
 }
 resultPostNext();
 
 function resultPostPrevious(event) {
   let urlNum = url + num;
   console.log(urlNum);
-
+  num--;
   fetch(urlNum)
     .then((response) => response.json())
     .then((json) => {
       getTitlePost.textContent = json.title;
       getTextPost.textContent = json.body;
       getIdPost.textContent = json.id;
+     
     });
-  num--;
+
 }
 
 // getPostButton.addEventListener("click", (e) => resultPosts(e));
