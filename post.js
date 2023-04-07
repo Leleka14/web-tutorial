@@ -6,56 +6,36 @@ let getTextPost = document.querySelector(".textPost");
 let getIdPost = document.querySelector(".idPost");
 let posts = document.querySelector(".posts");
 const url = "https://jsonplaceholder.typicode.com/posts/";
-const spinner = document.querySelector("#spinner")
+const spinner = document.querySelector("#spinner");
 
-
-getPostNextBotton.addEventListener("click", (e) => resultPostNext(e));
-getpreviousNextBotton.addEventListener("click", (e) => resultPostPrevious(e));
+getPostNextBotton.addEventListener("click", (type) => resultPost("next"));
+getpreviousNextBotton.addEventListener("click", (type) =>
+  resultPost("previous")
+);
 
 let num = 10;
-function resultPostNext(event) {
-  spinner.removeAttribute('hidden');
-  num++;
+function resultPost(type) {
+  if (type === "next") {
+    num++;
+  }
+  if (type === "previous") {
+    num--;
+  }
+
+  spinner.removeAttribute("hidden");
   let urlNum = url + num;
   console.log(urlNum);
 
   fetch(urlNum)
     .then((response) => response.json())
     .then((json) => {
-      spinner.setAttribute('hidden', '');
-      getTitlePost.textContent = json.title;
-      getTextPost.textContent = json.body;
-      getIdPost.textContent = json.id;
-     
-    });
-}
-resultPostNext();
-
-function resultPostPrevious(event) {
-  num--;
-  let urlNum = url + num;
-  console.log(urlNum);
-
-  fetch(urlNum)
-  
-    .then((response) => response.json())
-    .then((json) => {
+      spinner.setAttribute("hidden", "");
       getTitlePost.textContent = json.title;
       getTextPost.textContent = json.body;
       getIdPost.textContent = json.id;
     });
 }
-
-
-// function displayLoading() {
-//   getShowOutput.textContent = 'hjkdsfh'
-//  console.log(getShowOutput)
-// }
-
-
-
-
-
+resultPost();
 
 // getPostButton.addEventListener("click", (e) => resultPosts(e));
 
@@ -94,8 +74,6 @@ function resultPostPrevious(event) {
 //     });
 // }
 
-
-
 // function deleteRow(e) {
 //   console.log("delete");
 //   const postToDelete = document.querySelector(`#post-${e.target.id}`);
@@ -103,18 +81,6 @@ function resultPostPrevious(event) {
 //   console.log("messageToDelete", postToDelete);
 //   posts.removeChild(postToDelete);
 // }
-
-
-
-//.catch(error => console.log(error))
-
-//   const getData = (url) =>
-//   new Promise ((resolve, reject) =>
-//     fetch(url)
-//       .then(response => response.json())
-//       .then(json => resolve(json))
-//       .catch(error => reject(error))
-//   )
 
 // let getPostButton = document.querySelector("button");
 
@@ -126,16 +92,4 @@ function resultPostPrevious(event) {
 //     const createdPost = document.createElement("div");
 //     const createdTitle = document.createElement("h1");
 //     const createdText = document.createElement("h2");
-// }
-
-// const getData = async (url) => {
-//     const res = await fetch(url)
-//     const json = await res.json()
-//     return json
-// }
-// try {
-//   const date = await getData(url)
-//   console.log(date)
-// } catch (e) {
-//   console.log(error.message)
 // }
