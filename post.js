@@ -1,3 +1,5 @@
+// По ip з неиу
+
 let getPostButton = document.querySelector(".getbutton");
 let getPostNextBotton = document.querySelector(".nextBotton");
 let getpreviousNextBotton = document.querySelector(".previousBotton");
