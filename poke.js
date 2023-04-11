@@ -29,9 +29,10 @@ function aboutPokemon(pokemonData) {
   let pokemonDataContainer = document.querySelector("#pokemonData-container");
   pokemonDataContainer.className = "pokemonData";
   let pokemonDiv = document.createElement("div");
+  pokemonDataContainer.textContent = pokemonData.name;
 
   let pokeName = document.createElement("h4");
-  pokeName.textContent = pokemonData.name;
+   pokeName.textContent = pokemonData.name;
 
   createPokeImage(pokemonData.id - 1, pokemonData.name, pokemonDataContainer);
 
@@ -49,9 +50,7 @@ function renderPokemon(pokemon, id) {
   pokemonContainer.className = "cardPokemon";
   pokemonContainer.id = `idpoke${id + 1}`;
 
-  pokemonContainer.addEventListener("click", (e) =>
-    fetchPokemonData(pokemon)
-  );
+  pokemonContainer.addEventListener("click", (e) => fetchPokemonData(pokemon));
 
   createPokeImage(id, pokemon.name, pokemonContainer);
 
