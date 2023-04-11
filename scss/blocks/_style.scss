@@ -125,8 +125,26 @@ input[type="text"] {
 
   height: 350px;
   width: 300px;
+
 }
 
+img{
+  width: 200px;
+  height: 200px;
+}
+
+.pokemonData{
+  width: 400px;
+  height: 600px;
+  background-color: burlywood;
+}
+
+
+.conteiner__row{
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
 
 
 
