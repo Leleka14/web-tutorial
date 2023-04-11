@@ -176,7 +176,7 @@ input[type="text"] {
 }
 
 .imageContainer {
-  width: 100%;
-  height: auto;
+  max-width: 200px;
+  max-height: 200px;
 }
 /*# sourceMappingURL=main.css.map */
