@@ -107,6 +107,8 @@ input[type="text"] {
   max-width: 1300px;
   margin: 0 auto;
   padding-bottom: 70px;
+
+ 
 }
 
 .cardPokemon {
@@ -119,14 +121,16 @@ input[type="text"] {
   padding-left: 40px;
   padding-right: 45px;
 
-  text-align: left;
+  text-align: center;
   box-shadow: 10px 40px 50px rgba(229, 233, 246, 0.4);
   border-radius: 20px;
 
   height: 350px;
   width: 300px;
+ 
 
 }
+
 
 img{
   width: 200px;
@@ -146,5 +150,54 @@ img{
   justify-content: space-between;
 }
 
+.imageContainer{
+  margin: 0 auto;
+}
 
+.textPokemon{
+  margin: 0 auto;
+}
 
+.boxPokemon{
+  width: 40px;
+  height: 20px;
+  padding: 20px;
+ 
+  background: rgb(99, 16, 10);
+}
+
+.pokemon-attributes li {
+  float: left;
+  margin-right: -100%;
+  width: 32.29%;
+  border-radius: 5px;
+  margin: 0.5em 0 0 0;
+  padding: 0;
+  text-align: center;
+
+}
+.pokemon-attributes ul{
+  width: 100%;
+}
+
+.pokemon-attributes li a {
+  font-family: "Flexo-Medium",arial,sans-serif;
+  color: inherit;
+  display: block;
+  float: left;
+  line-height: 100%;
+  padding: 0.5em 0;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+li {
+  display: list-item;
+ // text-align: -webkit-match-parent;
+}
+ol, ul {
+  list-style: none;
+}

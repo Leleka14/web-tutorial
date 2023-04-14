@@ -4,7 +4,7 @@ let cardPokemon = document.querySelector(".card__pokemon");
 //getPokemonButton.addEventListener("click", (e) => fetchKantoPokemon(e));
 
 function fetchKantoPokemon() {
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=5&offset=0")
+  fetch("https://pokeapi.co/api/v2/pokemon?limit=6&offset=0")
     .then((response) => response.json())
     .then((allpokemon) => {
       console.log(allpokemon);
@@ -27,26 +27,40 @@ function fetchPokemonData(pokemon) {
 
 function aboutPokemon(pokemonData) {
   let pokemonDataContainer = document.querySelector("#pokemonData-container");
+
   pokemonDataContainer.className = "pokemonData";
   let pokemonDiv = document.createElement("div");
+pokemonDiv.className = "pokemon-attributes"
+
+
   pokemonDataContainer.textContent = pokemonData.name;
-
-  let pokeName = document.createElement("h4");
-   pokeName.textContent = pokemonData.name;
-
   createPokeImage(pokemonData.id - 1, pokemonData.name, pokemonDataContainer);
 
-  let pokeNumber = document.createElement("p");
-  pokeNumber.textContent = `${pokemonData.id}`;
+  let pokeTypes = document.createElement('ul') 
 
-  pokemonDiv.append(pokeName, pokeNumber);
+  createTypes(pokemonData.types, pokeTypes);
+
+  pokemonDiv.append(pokeTypes);
   pokemonDataContainer.appendChild(pokemonDiv);
+}
+
+function createTypes(types, ul) {
+  types.forEach(type => {
+    let typeBox = document.createElement("li");
+    let tepeBoxHref = document.createElement("a")
+   tepeBoxHref.textContent = type["type"]["name"];
+   tepeBoxHref.href = type["type"]["url"]
+   
+   typeBox.appendChild(tepeBoxHref)
+    ul.append(typeBox);
+  });
 }
 
 function renderPokemon(pokemon, id) {
   let allPokemonContainer = document.querySelector("#poke-container");
   let pokemonContainer = document.createElement("div");
-
+  let pokemonTextContainer = document.createElement("div");
+  pokemonTextContainer.className = "textPokemon";
   pokemonContainer.className = "cardPokemon";
   pokemonContainer.id = `idpoke${id + 1}`;
 
@@ -60,7 +74,8 @@ function renderPokemon(pokemon, id) {
   let pokeNumber = document.createElement("p");
   pokeNumber.textContent = `${id + 1}`;
 
-  pokemonContainer.append(pokeName, pokeNumber);
+  pokemonTextContainer.append(pokeName, pokeNumber);
+  pokemonContainer.append(pokemonTextContainer);
   allPokemonContainer.appendChild(pokemonContainer);
 }
 
