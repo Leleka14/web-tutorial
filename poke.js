@@ -30,28 +30,44 @@ function aboutPokemon(pokemonData) {
 
   pokemonDataContainer.className = "pokemonData";
   let pokemonDiv = document.createElement("div");
-pokemonDiv.className = "pokemon-attributes"
-
+  pokemonDiv.className = "pokemon-attributes";
 
   pokemonDataContainer.textContent = pokemonData.name;
   createPokeImage(pokemonData.id - 1, pokemonData.name, pokemonDataContainer);
 
-  let pokeTypes = document.createElement('ul') 
+  let pokeTypes = document.createElement("ul");
+  let pokemonDivStats = document.createElement("table");
 
   createTypes(pokemonData.types, pokeTypes);
+  createStats(pokemonData.stats, pokemonDivStats);
 
-  pokemonDiv.append(pokeTypes);
+  pokemonDiv.append(pokeTypes, pokemonDivStats);
   pokemonDataContainer.appendChild(pokemonDiv);
 }
 
+function createStats(stats, statDiv) {
+  stats.forEach((stat) => {
+
+    let statTr = document.createElement("tr");
+    let statBox = document.createElement("td");
+    let base_statBox = document.createElement("td");
+
+    statBox.textContent = stat["stat"]["name"];
+    base_statBox.textContent = stat.base_stat;
+
+    statTr.appendChild(statBox, base_statBox);
+    statDiv.append(statTr);
+  });
+}
+
 function createTypes(types, ul) {
-  types.forEach(type => {
+  types.forEach((type) => {
     let typeBox = document.createElement("li");
-    let tepeBoxHref = document.createElement("a")
-   tepeBoxHref.textContent = type["type"]["name"];
-   tepeBoxHref.href = type["type"]["url"]
-   
-   typeBox.appendChild(tepeBoxHref)
+    let tepeBoxHref = document.createElement("a");
+    tepeBoxHref.textContent = type["type"]["name"];
+    tepeBoxHref.href = type["type"]["url"];
+
+    typeBox.appendChild(tepeBoxHref);
     ul.append(typeBox);
   });
 }
