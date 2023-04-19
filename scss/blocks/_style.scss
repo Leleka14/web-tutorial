@@ -107,8 +107,6 @@ input[type="text"] {
   max-width: 1300px;
   margin: 0 auto;
   padding-bottom: 70px;
-
- 
 }
 
 .cardPokemon {
@@ -127,46 +125,53 @@ input[type="text"] {
 
   height: 350px;
   width: 300px;
- 
-
 }
 
-
-img{
+img {
   width: 200px;
   height: 200px;
 }
 
-.pokemonData{
-  width: 400px;
-  height: 600px;
-  background-color: burlywood;
-}
-
-
-.conteiner__row{
+.conteiner__row {
   display: flex;
   text-align: center;
   justify-content: space-between;
 }
 
-.imageContainer{
+.pokemonData {
+  width: 400px;
+  height: 600px;
+  background-color: burlywood;
+  display: inline;
+  justify-content: center;
+  text-align: center;
+}
+
+.imageContainer {
   margin: 0 auto;
 }
 
-.textPokemon{
+.textPokemon {
   margin: 0 auto;
 }
 
-.boxPokemon{
+.boxPokemon {
   width: 40px;
   height: 20px;
   padding: 20px;
- 
+
   background: rgb(99, 16, 10);
 }
 
-.pokemon-attributes li {
+.pokemon-attributes {
+  width: 350px;
+  height: 500px;
+}
+.poke-types {
+  margin: 0 auto;
+}
+
+.poke-types li {
   float: left;
   margin-right: -100%;
   width: 32.29%;
@@ -174,14 +179,13 @@ img{
   margin: 0.5em 0 0 0;
   padding: 0;
   text-align: center;
-
 }
-.pokemon-attributes ul{
+.poke-types ul {
   width: 100%;
 }
 
-.pokemon-attributes li a {
-  font-family: "Flexo-Medium",arial,sans-serif;
+.poke-types li a {
+  font-family: "Flexo-Medium", arial, sans-serif;
   color: inherit;
   display: block;
   float: left;
@@ -194,10 +198,23 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-li {
-  display: list-item;
- // text-align: -webkit-match-parent;
-}
-ol, ul {
+ol,
+ul {
   list-style: none;
+}
+
+.poke-stats {
+  padding-top: 50px;
+
+  table {
+    margin: 0 auto;
+  }
+}
+
+.background-color-fire{
+  color:red ;
+}
+
+.background-color-flying{
+  color: blue;
 }

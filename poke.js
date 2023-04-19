@@ -31,46 +31,69 @@ function aboutPokemon(pokemonData) {
   pokemonDataContainer.className = "pokemonData";
   let pokemonDiv = document.createElement("div");
   pokemonDiv.className = "pokemon-attributes";
+  let pokemonDivTypes = document.createElement("div");
+  pokemonDivTypes.className = "poke-types";
+  let pokemonDivStats = document.createElement("div");
+  pokemonDivStats.className = "poke-stats";
 
   pokemonDataContainer.textContent = pokemonData.name;
   createPokeImage(pokemonData.id - 1, pokemonData.name, pokemonDataContainer);
 
   let pokeTypes = document.createElement("ul");
-  let pokemonDivStats = document.createElement("table");
+  let pokemonTableStats = document.createElement("table");
 
   createTypes(pokemonData.types, pokeTypes);
-  createStats(pokemonData.stats, pokemonDivStats);
+  createStats(pokemonData.stats, pokemonTableStats);
 
-  pokemonDiv.append(pokeTypes, pokemonDivStats);
-  pokemonDataContainer.appendChild(pokemonDiv);
+  pokemonDivTypes.append(pokeTypes);
+  pokemonDivStats.append(pokemonTableStats);
+
+  pokemonDiv.append(pokemonDivTypes, pokemonDivStats);
+
+  // pokemonDiv.append(pokeTypes, pokemonTableStats);
+  pokemonDataContainer.append(pokemonDiv);
 }
 
-function createStats(stats, statDiv) {
+function createStats(stats, statTable) {
   stats.forEach((stat) => {
-
     let statTr = document.createElement("tr");
     let statBox = document.createElement("td");
-    let base_statBox = document.createElement("td");
+    let cellText = document.createTextNode(
+      ` ${stat["stat"]["name"]},  ${stat.base_stat}`
+    );
 
-    statBox.textContent = stat["stat"]["name"];
-    base_statBox.textContent = stat.base_stat;
+    // let base_statBox = document.createElement("td");
 
-    statTr.appendChild(statBox, base_statBox);
-    statDiv.append(statTr);
+    // statBox.textContent = stat["stat"]["name"];
+    // base_statBox.textContent = stat.base_stat;
+    statBox.appendChild(cellText);
+    statTr.appendChild(statBox);
+    statTable.append(statTr);
   });
 }
 
 function createTypes(types, ul) {
   types.forEach((type) => {
     let typeBox = document.createElement("li");
+
     let tepeBoxHref = document.createElement("a");
     tepeBoxHref.textContent = type["type"]["name"];
     tepeBoxHref.href = type["type"]["url"];
+    
 
+    console.log(getBackgroundColor("typeBox"));
     typeBox.appendChild(tepeBoxHref);
     ul.append(typeBox);
   });
 }
+
+function getBackgroundColor(name) {
+  return {
+    fire: "background-color-fire",
+    flying: "background-color-flying",
+  }[name];
+}
+
 
 function renderPokemon(pokemon, id) {
   let allPokemonContainer = document.querySelector("#poke-container");
