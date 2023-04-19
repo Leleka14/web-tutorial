@@ -54,6 +54,10 @@ html {
   background: red;
 }
 
+.divButton {
+  text-align: center;
+}
+
 .defaultClass {
   padding-top: 50px;
 }
@@ -267,11 +271,33 @@ ul {
   margin: 0 auto;
 }
 
-.background-color-fire {
-  color: red;
+.fire {
+  background-color: red;
 }
 
-.background-color-flying {
-  color: blue;
+.flying {
+  background-color: blue;
+}
+
+.grass {
+  background-color: #737373;
+}
+
+.poison {
+  background-color: cadetblue;
+}
+
+#loadMore {
+  width: 200px;
+  color: #fff;
+  display: block;
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-color: blue;
+  -webkit-transition: .3s;
+  transition: .3s;
 }
 /*# sourceMappingURL=main.css.map */

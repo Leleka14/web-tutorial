@@ -1,10 +1,14 @@
-let getPokemonButton = document.querySelector(".buttonPokemon");
+let getLearnButton = document.querySelector(".divButton")
 let cardPokemon = document.querySelector(".card__pokemon");
+//const url = "https://pokeapi.co/api/v2/pokemon?limit=";
+//let cout = 6;
 
-//getPokemonButton.addEventListener("click", (e) => fetchKantoPokemon(e));
 
-function fetchKantoPokemon() {
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=6&offset=0")
+
+
+let leadSamePoke = (numberPoke=6) => {
+let url = `https://pokeapi.co/api/v2/pokemon?limit=${numberPoke}`
+  fetch(url)
     .then((response) => response.json())
     .then((allpokemon) => {
       console.log(allpokemon);
@@ -14,6 +18,26 @@ function fetchKantoPokemon() {
       });
     });
 }
+
+getLearnButton.addEventListener("click", () => leadSamePoke(6));
+
+
+// function fetchKantoPokemon(type) {
+
+//   if (type === "learn") {
+//     cout =cout+6;
+//   }
+// let url1= url + cout
+//   fetch(url1)
+//     .then((response) => response.json())
+//     .then((allpokemon) => {
+//       console.log(allpokemon);
+//       allpokemon.results.forEach((pokemon, id) => {
+//         renderPokemon(pokemon, id);
+//         console.log(pokemon);
+//       });
+//     });
+// }
 
 function fetchPokemonData(pokemon) {
   let url = pokemon.url;
@@ -79,24 +103,17 @@ function createTypes(types, ul) {
     let tepeBoxHref = document.createElement("a");
     tepeBoxHref.textContent = type["type"]["name"];
     tepeBoxHref.href = type["type"]["url"];
-    
 
-    console.log(getBackgroundColor("typeBox"));
+    typeBox.className = type["type"]["name"];
+
     typeBox.appendChild(tepeBoxHref);
     ul.append(typeBox);
   });
 }
 
-function getBackgroundColor(name) {
-  return {
-    fire: "background-color-fire",
-    flying: "background-color-flying",
-  }[name];
-}
-
-
 function renderPokemon(pokemon, id) {
   let allPokemonContainer = document.querySelector("#poke-container");
+
   let pokemonContainer = document.createElement("div");
   let pokemonTextContainer = document.createElement("div");
   pokemonTextContainer.className = "textPokemon";
@@ -112,6 +129,8 @@ function renderPokemon(pokemon, id) {
 
   let pokeNumber = document.createElement("p");
   pokeNumber.textContent = `${id + 1}`;
+
+
 
   pokemonTextContainer.append(pokeName, pokeNumber);
   pokemonContainer.append(pokemonTextContainer);
@@ -132,4 +151,4 @@ function createPokeImage(pokemonID, pokemonName, containerDiv) {
   containerDiv.append(pokeImgContainer);
 }
 
-fetchKantoPokemon();
+leadSamePoke();
