@@ -3,9 +3,9 @@ let cardPokemon = document.querySelector(".card__pokemon");
 
 //let urlNext = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=6"
 
-let offsetPoke=0
+let offsetPoke = 0;
 
-let fetchKantoPokemon = (numberPoke=6) => {
+let fetchKantoPokemon = (numberPoke = 6) => {
   const urlNext = `https://pokeapi.co/api/v2/pokemon?offset=${offsetPoke}&limit=${numberPoke}`;
   fetch(urlNext)
     .then((response) => response.json())
@@ -14,14 +14,13 @@ let fetchKantoPokemon = (numberPoke=6) => {
       allpokemon.results.forEach((pokemon, id) => {
         renderPokemon(pokemon, id);
         console.log(pokemon);
-        console.log(offsetPoke)
+        console.log(offsetPoke);
       });
-      offsetPoke+=numberPoke
-      console.log(offsetPoke)
+      offsetPoke += numberPoke;
+      console.log(offsetPoke);
 
-     // urlNext = allpokemon.next
+      // urlNext = allpokemon.next
     });
-   
 };
 
 getLearnButton.addEventListener("click", () => fetchKantoPokemon());
@@ -36,25 +35,28 @@ function fetchPokemonData(pokemon) {
     });
 }
 
-
-function renderPokemon(pokemon, id) {
+function renderPokemon(pokemon) {
   let allPokemonContainer = document.querySelector("#poke-container");
 
   let pokemonContainer = document.createElement("div");
   let pokemonTextContainer = document.createElement("div");
+
+  let oldPoke = document.querySelectorAll(".cardPokemon");
+  const lengthOffsetPoke = oldPoke.length + 1;
+
   pokemonTextContainer.className = "textPokemon";
   pokemonContainer.className = "cardPokemon";
-  pokemonContainer.id = `idpoke${id + 1}`;
+  pokemonContainer.id = `idpoke${lengthOffsetPoke}`;
 
   pokemonContainer.addEventListener("click", (e) => fetchPokemonData(pokemon));
 
-  createPokeImage(id, pokemon.name, pokemonContainer);
+  createPokeImage(lengthOffsetPoke, pokemon.name, pokemonContainer);
 
   let pokeName = document.createElement("h4");
   pokeName.textContent = pokemon.name;
 
   let pokeNumber = document.createElement("p");
-  pokeNumber.textContent = `${id + 1}`;
+  pokeNumber.textContent = `${lengthOffsetPoke}`;
 
   pokemonTextContainer.append(pokeName, pokeNumber);
   pokemonContainer.append(pokemonTextContainer);
@@ -66,9 +68,7 @@ function createPokeImage(pokemonID, pokemonName, containerDiv) {
   pokeImgContainer.className = "imageContainer";
 
   let pokeImage = document.createElement("img");
-  pokeImage.src = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${
-    pokemonID + 1
-  }.svg`;
+  pokeImage.src = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemonID}.svg`;
   pokeImage.alt = `${pokemonName}`;
 
   pokeImgContainer.append(pokeImage);
@@ -130,6 +130,5 @@ function createTypes(types, ul) {
     ul.append(typeBox);
   });
 }
-
 
 fetchKantoPokemon();
