@@ -1,14 +1,11 @@
-let getLearnButton = document.querySelector(".divButton")
+let getLearnButton = document.querySelector("#learnButton");
 let cardPokemon = document.querySelector(".card__pokemon");
-//const url = "https://pokeapi.co/api/v2/pokemon?limit=";
-//let cout = 6;
 
+let urlNext = "https://pokeapi.co/api/v2/pokemon?offset=6&limit=6"
 
-
-
-let leadSamePoke = (numberPoke=6) => {
-let url = `https://pokeapi.co/api/v2/pokemon?limit=${numberPoke}`
-  fetch(url)
+let fetchKantoPokemon = () => {
+ // const url = `https://pokeapi.co/api/v2/pokemon?limit=${numberPoke}`;
+  fetch(urlNext)
     .then((response) => response.json())
     .then((allpokemon) => {
       console.log(allpokemon);
@@ -16,28 +13,11 @@ let url = `https://pokeapi.co/api/v2/pokemon?limit=${numberPoke}`
         renderPokemon(pokemon, id);
         console.log(pokemon);
       });
+      urlNext = allpokemon.next
     });
-}
+};
 
-getLearnButton.addEventListener("click", () => leadSamePoke(6));
-
-
-// function fetchKantoPokemon(type) {
-
-//   if (type === "learn") {
-//     cout =cout+6;
-//   }
-// let url1= url + cout
-//   fetch(url1)
-//     .then((response) => response.json())
-//     .then((allpokemon) => {
-//       console.log(allpokemon);
-//       allpokemon.results.forEach((pokemon, id) => {
-//         renderPokemon(pokemon, id);
-//         console.log(pokemon);
-//       });
-//     });
-// }
+getLearnButton.addEventListener("click", () => fetchKantoPokemon());
 
 function fetchPokemonData(pokemon) {
   let url = pokemon.url;
@@ -74,7 +54,6 @@ function aboutPokemon(pokemonData) {
 
   pokemonDiv.append(pokemonDivTypes, pokemonDivStats);
 
-  // pokemonDiv.append(pokeTypes, pokemonTableStats);
   pokemonDataContainer.append(pokemonDiv);
 }
 
@@ -85,11 +64,6 @@ function createStats(stats, statTable) {
     let cellText = document.createTextNode(
       ` ${stat["stat"]["name"]},  ${stat.base_stat}`
     );
-
-    // let base_statBox = document.createElement("td");
-
-    // statBox.textContent = stat["stat"]["name"];
-    // base_statBox.textContent = stat.base_stat;
     statBox.appendChild(cellText);
     statTr.appendChild(statBox);
     statTable.append(statTr);
@@ -130,8 +104,6 @@ function renderPokemon(pokemon, id) {
   let pokeNumber = document.createElement("p");
   pokeNumber.textContent = `${id + 1}`;
 
-
-
   pokemonTextContainer.append(pokeName, pokeNumber);
   pokemonContainer.append(pokemonTextContainer);
   allPokemonContainer.appendChild(pokemonContainer);
@@ -151,4 +123,4 @@ function createPokeImage(pokemonID, pokemonName, containerDiv) {
   containerDiv.append(pokeImgContainer);
 }
 
-leadSamePoke();
+fetchKantoPokemon();
