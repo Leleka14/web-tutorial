@@ -37,7 +37,7 @@
 .buttonDel {
   background: red;
 }
-.divButton{
+.divButton {
   text-align: center;
 }
 
@@ -130,10 +130,10 @@ input[type="text"] {
   width: 300px;
 }
 
-img {
-  width: 200px;
-  height: 200px;
-}
+// img {
+//   width: 200px;
+//   height: 200px;
+// }
 
 .conteiner__row {
   display: flex;
@@ -148,10 +148,25 @@ img {
   display: inline;
   justify-content: center;
   text-align: center;
+
+  position: fixed;
+  right: 0;
+}
+.namePoke {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .imageContainer {
+  padding-bottom: 20px;
   margin: 0 auto;
+}
+.imageContainer img {
+  width: 200px;
+  height: 200px;
 }
 
 .textPokemon {
@@ -167,78 +182,87 @@ img {
 }
 
 .pokemon-attributes {
+  padding-top: 30px;
   width: 350px;
   height: 500px;
-}
-.poke-types {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
-}
-
-.poke-types li {
-  float: left;
-  margin-right: -100%;
-  width: 32.29%;
-  border-radius: 5px;
-  margin: 0.5em 0 0 0;
-  padding: 0;
   text-align: center;
 }
-.poke-types ul {
-  width: 100%;
+.poke-types {
+  width: 350px;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    li {
+      width: 32.29%;
+      border-radius: 5px;
+      margin: 0.5em 0 0 0;
+    }
+  }
 }
 
 .poke-types li a {
   font-family: "Flexo-Medium", arial, sans-serif;
   color: inherit;
-  display: block;
+
   float: left;
   line-height: 100%;
   padding: 0.5em 0;
   width: 100%;
 }
-a {
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-ol,
-ul {
-  list-style: none;
-}
 
 .poke-stats {
-  padding-top: 50px;
+  padding-top: 30px;
 
   table {
     margin: 0 auto;
   }
 }
 
-.fire{
-  background-color:red ;
+.fire {
+  background-color: red;
 }
 
-.flying{
+.flying {
   background-color: blue;
 }
 
-.grass{
+.grass {
   background-color: #737373;
 }
 
-.poison{
+.poison {
   background-color: cadetblue;
 }
 
-#loadMore {
-  width: 200px;
-  color: #fff;
-  display: block;
-  text-align: center;
-  margin: 20px auto;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background-color: blue;
-  transition: .3s;
+// .imageClose{
+//   width: 30px;
+//   max-height: 30px;
+//   position: fixed;
+//   right: 0;
+//  // float: right;
+
+// }
+
+// .close {
+//   cursor: pointer;
+//   position: absolute;
+//   top: 50%;
+//   right: 0%;
+//   padding: 12px 16px;
+//   transform: translate(0%, -50%);
+// }
+
+// .close:hover {background: #bbb;}
+
+.closeBtn {
+  font-size: 40px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
 }
+

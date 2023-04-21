@@ -53,7 +53,7 @@ function renderPokemon(pokemon) {
   createPokeImage(lengthOffsetPoke, pokemon.name, pokemonContainer);
 
   let pokeName = document.createElement("h4");
-  pokeName.textContent = pokemon.name;
+  pokeName.textContent = upFirst(pokemon.name);
 
   let pokeNumber = document.createElement("p");
   pokeNumber.textContent = `${lengthOffsetPoke}`;
@@ -81,13 +81,31 @@ function aboutPokemon(pokemonData) {
   pokemonDataContainer.className = "pokemonData";
   let pokemonDiv = document.createElement("div");
   pokemonDiv.className = "pokemon-attributes";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "closeBtn";
+  closeBtn.type = "button";
+  closeBtn.innerHTML = "&times;";
+
+  closeBtn.addEventListener("click", function () {
+    // this.parentElement.style.display = 'none';
+    pokemonDataContainer.remove();
+  });
+
+  //  let pokemonName = document.createElement('h1')
+  //  pokemonName.className = "namePoke"
+
   let pokemonDivTypes = document.createElement("div");
   pokemonDivTypes.className = "poke-types";
   let pokemonDivStats = document.createElement("div");
   pokemonDivStats.className = "poke-stats";
 
+  //pokemonName.textContent = pokemonData.name;
   pokemonDataContainer.textContent = pokemonData.name;
-  createPokeImage(pokemonData.id - 1, pokemonData.name, pokemonDataContainer);
+
+  // pokemonDataContainer.append(pokemonName)
+
+  createPokeImage(pokemonData.id, pokemonData.name, pokemonDiv);
 
   let pokeTypes = document.createElement("ul");
   let pokemonTableStats = document.createElement("table");
@@ -99,8 +117,7 @@ function aboutPokemon(pokemonData) {
   pokemonDivStats.append(pokemonTableStats);
 
   pokemonDiv.append(pokemonDivTypes, pokemonDivStats);
-
-  pokemonDataContainer.append(pokemonDiv);
+  pokemonDataContainer.append(closeBtn, pokemonDiv);
 }
 
 function createStats(stats, statTable) {
@@ -108,7 +125,7 @@ function createStats(stats, statTable) {
     let statTr = document.createElement("tr");
     let statBox = document.createElement("td");
     let cellText = document.createTextNode(
-      ` ${stat["stat"]["name"]},  ${stat.base_stat}`
+      ` ${upFirst(stat["stat"]["name"])} -  ${stat.base_stat}`
     );
     statBox.appendChild(cellText);
     statTr.appendChild(statBox);
@@ -121,7 +138,7 @@ function createTypes(types, ul) {
     let typeBox = document.createElement("li");
 
     let tepeBoxHref = document.createElement("a");
-    tepeBoxHref.textContent = type["type"]["name"];
+    tepeBoxHref.textContent = upFirst(type["type"]["name"]);
     tepeBoxHref.href = type["type"]["url"];
 
     typeBox.className = type["type"]["name"];
@@ -130,5 +147,11 @@ function createTypes(types, ul) {
     ul.append(typeBox);
   });
 }
+
+const upFirst = (str) => {
+  if (!str) return str;
+
+  return str[0].toUpperCase() + str.slice(1);
+};
 
 fetchKantoPokemon();
