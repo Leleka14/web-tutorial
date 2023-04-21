@@ -88,8 +88,7 @@ function aboutPokemon(pokemonData) {
   closeBtn.innerHTML = "&times;";
 
   closeBtn.addEventListener("click", function () {
-    // this.parentElement.style.display = 'none';
-    pokemonDataContainer.remove();
+    pokemonDataContainer.className="closePoke";
   });
 
   //  let pokemonName = document.createElement('h1')
