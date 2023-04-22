@@ -1,13 +1,7 @@
 let getLearnButton = document.querySelector("#learnButton");
-//let cardPokemon = document.querySelector(".card__pokemon");
+let cardPokemon = document.querySelector(".card__pokemon");
 
-let getAllPokemonId = document.querySelector("#poke-container");
-let getAllPokemonClass = document.querySelector(".pokemon-row-all")
-let getCardPokemon = document.querySelector(".cardPokemon")
-let getImgContainer = document.querySelector(".imgContainer")
-let getTextPokemon = document.querySelector(".textPokemon")
-let getPokeName = document.querySelector(".pokeName")
-let getPokeId = document.querySelector(".pokeId")
+//let urlNext = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=6"
 
 let offsetPoke = 0;
 
@@ -20,101 +14,106 @@ let fetchKantoPokemon = (numberPoke = 6) => {
       allpokemon.results.forEach((pokemon, id) => {
         renderPokemon(pokemon, id);
         console.log(pokemon);
-      //  console.log(offsetPoke);
+        console.log(offsetPoke);
       });
       offsetPoke += numberPoke;
-      //console.log(offsetPoke);
+      console.log(offsetPoke);
 
       // urlNext = allpokemon.next
     });
 };
 
-//getLearnButton.addEventListener("click", () => fetchKantoPokemon());
+getLearnButton.addEventListener("click", () => fetchKantoPokemon());
 
-// function fetchPokemonData(pokemon) {
-//   let url = pokemon.url;
-//   fetch(url)
-//     .then((response) => response.json())
-//     .then((pokemonData) => {
-//       console.log(pokemonData);
-//       aboutPokemon(pokemonData);
-//     });
-// }
-
-function renderPokemon(pokemon) {
-
-  let oldPoke = document.querySelectorAll(".cardPokemon");
-  const lengthOffsetPoke = oldPoke.length ;
-  getCardPokemon.id= `card-${lengthOffsetPoke}`
- 
-  console.log(getCardPokemon)
-
-
-getTextPokemon.appendChild(getPokeName).textContent = pokemon.name
-getTextPokemon.appendChild(getPokeId).textContent = `${lengthOffsetPoke}`
-
-getCardPokemon.appendChild(getTextPokemon);
-//getAllPokemonClass.appendChild(getCardPokemon)
-
-
+function fetchPokemonData(pokemon) {
+  let url = pokemon.url;
+  fetch(url)
+    .then((response) => response.json())
+    .then((pokemonData) => {
+      console.log(pokemonData);
+      aboutPokemon(pokemonData);
+    });
 }
 
-// function createPokeImage(pokemonID, pokemonName, containerDiv) {
-//   // let pokeImgContainer = document.createElement("div");
-//   // pokeImgContainer.className = "imageContainer";
+function renderPokemon(pokemon) {
+  let allPokemonContainer = document.querySelector("#poke-container");
 
-//   let pokeImage = document.createElement("img");
-//   pokeImage.src = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemonID}.svg`;
-//   pokeImage.alt = `${pokemonName}`;
+  let pokemonContainer = document.createElement("div");
+  let pokemonTextContainer = document.createElement("div");
 
-//   getImgContainer.append(pokeImage);
-//   containerDiv.append(getImgContainer);
-// }
+  let oldPoke = document.querySelectorAll(".cardPokemon");
+  const lengthOffsetPoke = oldPoke.length + 1;
 
-// function aboutPokemon(pokemonData) {
-//   let pokemonDataContainer = document.querySelector("#pokemonData-container");
-//   pokemonDataContainer.textContent = '';
-//   pokemonDataContainer.className = "pokemonData";
-//   let pokemonDiv = document.createElement("div");
-//   pokemonDiv.className = "pokemon-attributes";
+  pokemonTextContainer.className = "textPokemon";
+  pokemonContainer.className = "cardPokemon";
+  pokemonContainer.id = `idpoke${lengthOffsetPoke}`;
 
-//   const closeBtn = document.createElement("button");
-//   closeBtn.className = "closeBtn";
-//   closeBtn.type = "button";
-//   closeBtn.innerHTML = "&times;";
+  pokemonContainer.addEventListener("click", (e) => fetchPokemonData(pokemon));
 
-//   closeBtn.addEventListener("click", function () {
-//     //pokemonDataContainer.replaceChildren()
-//     pokemonDataContainer.className="closePoke";
-//   });
+  let pokeImgContainer = document.createElement("div");
+  pokeImgContainer.className = "imageContainer";
 
-//    let pokemonName = document.createElement('h1')
-//    pokemonName.className = "namePoke"
+  createPokeImage(lengthOffsetPoke, pokemon.name, pokeImgContainer);
 
-//   let pokemonDivTypes = document.createElement("div");
-//   pokemonDivTypes.className = "poke-types";
-//   let pokemonDivStats = document.createElement("div");
-//   pokemonDivStats.className = "poke-stats";
+  let pokeName = document.createElement("h4");
+  pokeName.textContent = upFirst(pokemon.name);
 
-//   pokemonName.textContent = pokemonData.name;
- 
+  let pokeNumber = document.createElement("p");
+  pokeNumber.textContent = `${lengthOffsetPoke}`;
 
-//   pokemonDataContainer.append(pokemonName)
+  pokemonTextContainer.append(pokeName, pokeNumber);
+  pokemonContainer.append(pokeImgContainer, pokemonTextContainer);
+  allPokemonContainer.appendChild(pokemonContainer);
+}
 
-//   createPokeImage(pokemonData.id, pokemonData.name, pokemonDiv);
+function createPokeImage(pokemonID, pokemonName, containerDiv) {
+  // let pokeImgContainer = document.createElement("div");
+  // pokeImgContainer.className = "imageContainer";
 
-//   let pokeTypes = document.createElement("ul");
-//   let pokemonTableStats = document.createElement("table");
+  let pokeImage = document.createElement("img");
+  pokeImage.src = `https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemonID}.svg`;
+  pokeImage.alt = `${pokemonName}`;
 
-//   createTypes(pokemonData.types, pokeTypes);
-//   createStats(pokemonData.stats, pokemonTableStats);
+  // pokeImgContainer.append(pokeImage);
+  containerDiv.append(pokeImage);
+}
 
-//   pokemonDivTypes.append(pokeTypes);
-//   pokemonDivStats.append(pokemonTableStats);
+function aboutPokemon(pokemonData) {
+  let pokemonDataContainer = document.querySelector("#pokemonData-container");
 
-//   pokemonDiv.append(pokemonDivTypes, pokemonDivStats);
-//   pokemonDataContainer.append(closeBtn, pokemonDiv);
-// }
+  let pokemonDiv = document.querySelector(".pokemon-attributes");
+  let pokemonName = document.querySelector(".namePoke");
+  let pokemonDivTypes = document.querySelector(".poke-types");
+  let pokemonDivStats = document.querySelector(".poke-stats");
+  const closeBtn = document.querySelector(".closeBtn");
+  let pokeImgContainer = document.querySelector(".imageConteiner");
+
+  pokemonDataContainer.textContent = "";
+
+  closeBtn.innerHTML = "&times;";
+
+  closeBtn.addEventListener("click", function () {
+    pokemonDataContainer.className = "closePoke";
+  });
+
+  pokemonName.textContent = pokemonData.name;
+
+  pokemonDiv.append(pokemonName);
+  let pokeIm = document.createElement("div");
+  createPokeImage(pokemonData.id, pokemonData.name, pokeIm);
+  pokeImgContainer.replaceChildren(pokeIm);
+  let pokeTypes = document.createElement("ul");
+  let pokemonTableStats = document.createElement("table");
+
+  createTypes(pokemonData.types, pokeTypes);
+  createStats(pokemonData.stats, pokemonTableStats);
+
+  pokemonDivTypes.replaceChildren(pokeTypes);
+  pokemonDivStats.replaceChildren(pokemonTableStats);
+
+  pokemonDiv.append(pokemonDivTypes, pokemonDivStats);
+  pokemonDataContainer.append(closeBtn, pokemonDiv);
+}
 
 function createStats(stats, statTable) {
   stats.forEach((stat) => {

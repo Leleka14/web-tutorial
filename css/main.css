@@ -246,7 +246,7 @@ input[type="text"] {
   }
 }
 
-.pokemon-row-all {
+.pokemon-row {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[3];
@@ -335,7 +335,6 @@ input[type="text"] {
 }
 
 .pokemon-attributes {
-  padding-top: 30px;
   width: 350px;
   height: 500px;
   display: -webkit-box;
