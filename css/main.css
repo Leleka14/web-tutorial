@@ -246,7 +246,7 @@ input[type="text"] {
   }
 }
 
-.pokemon-row {
+.pokemon-row-all {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[3];
