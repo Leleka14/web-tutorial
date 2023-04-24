@@ -77,7 +77,7 @@ function createPokeImage(pokemonID, pokemonName, containerDiv) {
 
 function aboutPokemon(pokemonData) {
   let pokemonDataContainer = document.querySelector("#pokemonData-container");
-
+  pokemonDataContainer.textContent = "";
   pokemonDataContainer.className = "pokemonData";
   let pokemonDiv = document.createElement("div");
   pokemonDiv.className = "pokemon-attributes";
@@ -88,21 +88,20 @@ function aboutPokemon(pokemonData) {
   closeBtn.innerHTML = "&times;";
 
   closeBtn.addEventListener("click", function () {
-    pokemonDataContainer.className="closePoke";
+    pokemonDataContainer.className = "closePoke";
   });
 
-  //  let pokemonName = document.createElement('h1')
-  //  pokemonName.className = "namePoke"
+  let pokemonName = document.createElement("h1");
+  pokemonName.className = "namePoke";
 
   let pokemonDivTypes = document.createElement("div");
   pokemonDivTypes.className = "poke-types";
   let pokemonDivStats = document.createElement("div");
   pokemonDivStats.className = "poke-stats";
 
-  //pokemonName.textContent = pokemonData.name;
-  pokemonDataContainer.textContent = pokemonData.name;
+  pokemonName.textContent = upFirst(pokemonData.name);
 
-  // pokemonDataContainer.append(pokemonName)
+  pokemonDiv.append(pokemonName);
 
   createPokeImage(pokemonData.id, pokemonData.name, pokemonDiv);
 

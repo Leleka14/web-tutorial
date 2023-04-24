@@ -88,7 +88,7 @@ function aboutPokemon(pokemonData) {
   const closeBtn = document.querySelector(".closeBtn");
   let pokeImgContainer = document.querySelector(".imageConteiner");
 
-  pokemonDataContainer.textContent = "";
+ // pokemonDataContainer.textContent = "";
 
   closeBtn.innerHTML = "&times;";
 

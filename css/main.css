@@ -282,6 +282,11 @@ input[type="text"] {
   width: 300px;
 }
 
+img {
+  width: 200px;
+  height: 200px;
+}
+
 .conteiner__row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -316,11 +321,6 @@ input[type="text"] {
 .imageContainer {
   padding-bottom: 20px;
   margin: 0 auto;
-}
-
-.imageContainer img {
-  width: 200px;
-  height: 200px;
 }
 
 .textPokemon {
