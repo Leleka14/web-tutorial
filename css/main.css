@@ -120,7 +120,7 @@ legend {
 
 .title {
   margin-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   color: #252b42;
   font-family: Montserrat;
   font-size: 40px;
@@ -175,6 +175,7 @@ legend {
 
 input[type="text"] {
   padding: 12px 20px;
+  border: 1px solid #290c0c;
 }
 
 .messages {
@@ -409,6 +410,41 @@ img {
 }
 
 .closePoke {
+  display: none;
+}
+
+#search-container {
+  padding-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 15px;
+}
+
+#search-container input {
+  background-color: transparent;
+  width: 40%;
+  border-bottom: 2px solid #110f29;
+  padding: 1em 0.3em;
+}
+
+#search-container input:focus {
+  border-bottom-color: #6759ff;
+}
+
+#search-container button {
+  padding: 1em 2em;
+  margin-left: 1em;
+  background-color: #6759ff;
+  color: #ffffff;
+  border-radius: 5px;
+  margin-top: 0.5em;
+}
+
+.hide {
   display: none;
 }
 /*# sourceMappingURL=main.css.map */

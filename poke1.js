@@ -1,9 +1,24 @@
 let getLearnButton = document.querySelector("#learnButton");
 let cardPokemon = document.querySelector(".card__pokemon");
 
+// let resultInput = document.querySelector("input");
+// let getPokemonButton = document.querySelector(".getbutton");
+
 //let urlNext = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=6"
 
 let offsetPoke = 0;
+const searchInput = document.querySelector("[data-search]");
+
+let pokemons = [];
+
+searchInput.addEventListener("input", (e) => {
+  const value = e.target.value.toLowerCase();
+  pokemons.forEach((pokemon) => {
+    const isVisible = pokemon.name.toLowerCase().includes(value);
+    // user.email.toLowerCase().includes(value)
+    pokemon.element.classList.toggle("hide", !isVisible);
+  });
+});
 
 let fetchKantoPokemon = (numberPoke = 6) => {
   const urlNext = `https://pokeapi.co/api/v2/pokemon?offset=${offsetPoke}&limit=${numberPoke}`;
@@ -11,9 +26,11 @@ let fetchKantoPokemon = (numberPoke = 6) => {
     .then((response) => response.json())
     .then((allpokemon) => {
       console.log(allpokemon);
-      allpokemon.results.forEach((pokemon, id) => {
+      pokemons = allpokemon.results.map((pokemon, id) => {
         renderPokemon(pokemon, id);
+
         console.log(pokemon);
+
         console.log(offsetPoke);
       });
       offsetPoke += numberPoke;
@@ -53,6 +70,8 @@ function renderPokemon(pokemon) {
   createPokeImage(lengthOffsetPoke, pokemon.name, pokemonContainer);
 
   let pokeName = document.createElement("h4");
+  pokeName.className = "namePoke";
+  //pokeName.classList.add("namePoke", "hide");
   pokeName.textContent = upFirst(pokemon.name);
 
   let pokeNumber = document.createElement("p");
@@ -61,6 +80,25 @@ function renderPokemon(pokemon) {
   pokemonTextContainer.append(pokeName, pokeNumber);
   pokemonContainer.append(pokemonTextContainer);
   allPokemonContainer.appendChild(pokemonContainer);
+
+  // //Search button click
+  // document.getElementById("search").addEventListener("click", () => {
+  //   //initializations
+  //   let searchInput = document.getElementById("search-input").value;
+  //   let elements = document.querySelectorAll(".namePoke");
+  //   //let pokemonContainer = document.querySelectorAll(".cardPokemon");
+  //   //loop through all elements
+  //   elements.forEach((element) => {
+  //     //check if text includes the search value
+  //     if (element.innerText.includes(searchInput.toUpperCase())) {
+  //       //display matching card
+  //       oldPoke.classList.remove("hide");
+  //     } else {
+  //       //hide others
+  //       oldPoke.classList.add("hide");
+  //     }
+  //   });
+  // });
 }
 
 function createPokeImage(pokemonID, pokemonName, containerDiv) {
