@@ -11,6 +11,27 @@ const searchInput = document.querySelector("[data-search]");
 
 let pokemons = [];
 
+//Search button click
+document.getElementById("searchButton").addEventListener("click", () => {
+  console.log("search");
+  //initializations
+  let oldPoke = document.querySelectorAll(".cardPokemon");
+
+  let searchInput = document.getElementById("search-input").value;
+    //let pokemonContainer = document.querySelectorAll(".cardPokemon");
+  //loop through all elements
+  oldPoke.forEach((element) => {
+    //check if text includes the search value
+    if (element.innerText.toUpperCase().includes(searchInput.toUpperCase())) {
+      //display matching card
+      element.classList.remove("hide");
+    } else {
+      //hide others
+      element.classList.add("hide");
+    }
+  });
+});
+
 searchInput.addEventListener("input", (e) => {
   const value = e.target.value.toLowerCase();
   pokemons.forEach((pokemon) => {
@@ -81,24 +102,7 @@ function renderPokemon(pokemon) {
   pokemonContainer.append(pokemonTextContainer);
   allPokemonContainer.appendChild(pokemonContainer);
 
-  // //Search button click
-  // document.getElementById("search").addEventListener("click", () => {
-  //   //initializations
-  //   let searchInput = document.getElementById("search-input").value;
-  //   let elements = document.querySelectorAll(".namePoke");
-  //   //let pokemonContainer = document.querySelectorAll(".cardPokemon");
-  //   //loop through all elements
-  //   elements.forEach((element) => {
-  //     //check if text includes the search value
-  //     if (element.innerText.includes(searchInput.toUpperCase())) {
-  //       //display matching card
-  //       oldPoke.classList.remove("hide");
-  //     } else {
-  //       //hide others
-  //       oldPoke.classList.add("hide");
-  //     }
-  //   });
-  // });
+
 }
 
 function createPokeImage(pokemonID, pokemonName, containerDiv) {
