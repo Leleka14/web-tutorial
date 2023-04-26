@@ -1,7 +1,6 @@
 let getLearnButton = document.querySelector("#learnButton");
-let cardPokemon = document.querySelector(".card__pokemon");
+let getSearchButton = document.getElementById("searchButton")
 
-//let urlNext = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=6"
 
 let offsetPoke = 0;
 
@@ -35,6 +34,30 @@ function fetchPokemonData(pokemon) {
     });
 }
 
+//Search button click
+getSearchButton.addEventListener("click", () => {
+  console.log("search");
+
+  let oldPoke = document.querySelectorAll(".cardPokemon");
+  //console.log(oldPoke)
+  let searchInput = document.getElementById("search-input").value;
+  //let pokemonContainer = document.querySelectorAll(".cardPokemon");
+  //loop through all elements
+  oldPoke.forEach((element) => {
+    console.log(oldPoke);
+    //element.innerText - повертає текст (назву покемона)
+    if (element.innerText.toUpperCase().includes(searchInput.toUpperCase())) {
+      //display matching card
+      // element
+      element.classList.remove("hide");
+    } else {
+      //hide others
+      console.log("not");
+      element.classList.add("hide");
+    }
+  });
+});
+
 function renderPokemon(pokemon) {
   let allPokemonContainer = document.querySelector("#poke-container");
 
@@ -48,7 +71,9 @@ function renderPokemon(pokemon) {
   pokemonContainer.className = "cardPokemon";
   pokemonContainer.id = `idpoke${lengthOffsetPoke}`;
 
-  pokemonContainer.addEventListener("click", (e) => fetchPokemonData(pokemon));
+  pokemonContainer.addEventListener("click", (e) => {
+    fetchPokemonData(pokemon);
+  });
 
   let pokeImgContainer = document.createElement("div");
   pokeImgContainer.className = "imageContainer";
@@ -88,15 +113,16 @@ function aboutPokemon(pokemonData) {
   const closeBtn = document.querySelector(".closeBtn");
   let pokeImgContainer = document.querySelector(".imageConteiner");
 
- // pokemonDataContainer.textContent = "";
+  pokemonDataContainer.classList.remove("hide");
+  // pokemonDataContainer.textContent = "";
 
-  closeBtn.innerHTML = "&times;";
+  closeBtn.innerHTML = "&times";
 
   closeBtn.addEventListener("click", function () {
-    pokemonDataContainer.className = "closePoke";
+    pokemonDataContainer.classList.add("hide");
   });
 
-  pokemonName.textContent = pokemonData.name;
+  pokemonName.textContent = upFirst(pokemonData.name);
 
   pokemonDiv.append(pokemonName);
   let pokeIm = document.createElement("div");

@@ -9,37 +9,10 @@ let cardPokemon = document.querySelector(".card__pokemon");
 let offsetPoke = 0;
 const searchInput = document.querySelector("[data-search]");
 
-let pokemons = [];
 
-//Search button click
-document.getElementById("searchButton").addEventListener("click", () => {
-  console.log("search");
-  //initializations
-  let oldPoke = document.querySelectorAll(".cardPokemon");
 
-  let searchInput = document.getElementById("search-input").value;
-    //let pokemonContainer = document.querySelectorAll(".cardPokemon");
-  //loop through all elements
-  oldPoke.forEach((element) => {
-    //check if text includes the search value
-    if (element.innerText.toUpperCase().includes(searchInput.toUpperCase())) {
-      //display matching card
-      element.classList.remove("hide");
-    } else {
-      //hide others
-      element.classList.add("hide");
-    }
-  });
-});
 
-searchInput.addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase();
-  pokemons.forEach((pokemon) => {
-    const isVisible = pokemon.name.toLowerCase().includes(value);
-    // user.email.toLowerCase().includes(value)
-    pokemon.element.classList.toggle("hide", !isVisible);
-  });
-});
+
 
 let fetchKantoPokemon = (numberPoke = 6) => {
   const urlNext = `https://pokeapi.co/api/v2/pokemon?offset=${offsetPoke}&limit=${numberPoke}`;
@@ -47,7 +20,7 @@ let fetchKantoPokemon = (numberPoke = 6) => {
     .then((response) => response.json())
     .then((allpokemon) => {
       console.log(allpokemon);
-      pokemons = allpokemon.results.map((pokemon, id) => {
+      allpokemon.results.forEach((pokemon, id) => {
         renderPokemon(pokemon, id);
 
         console.log(pokemon);
@@ -72,6 +45,31 @@ function fetchPokemonData(pokemon) {
       aboutPokemon(pokemonData);
     });
 }
+
+//Search button click
+document.getElementById("searchButton").addEventListener("click", () => {
+  console.log("search");
+
+  let oldPoke = document.querySelectorAll(".cardPokemon");
+  //console.log(oldPoke)
+  let searchInput = document.getElementById("search-input").value;
+  //let pokemonContainer = document.querySelectorAll(".cardPokemon");
+  //loop through all elements
+  oldPoke.forEach((element) => {
+    console.log(oldPoke);
+    //element.innerText - повертає текст (назву покемона)
+    if (element.innerText.toUpperCase().includes(searchInput.toUpperCase())) {
+      //display matching card
+      // element
+      element.classList.remove("hide");
+    } else {
+      //hide others
+      console.log("not");
+      element.classList.add("hide");
+    }
+  });
+});
+
 
 function renderPokemon(pokemon) {
   let allPokemonContainer = document.querySelector("#poke-container");
