@@ -94,8 +94,6 @@ button, input[type="submit"] {
   display: inline-block;
   -webkit-box-shadow: none;
           box-shadow: none;
-  background-color: transparent;
-  background: none;
   cursor: pointer;
   text-decoration: none;
 }
@@ -154,7 +152,36 @@ legend {
 }
 
 .buttonDel {
+  width: 50px;
+  height: 30px;
   background: red;
+}
+
+.buttonEdit {
+  width: 50px;
+  height: 30px;
+  background: #00ff37;
+}
+
+.items-list {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+}
+
+.items-list li {
+  padding: 10px 0;
+  font-weight: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
 }
 
 .divButton {
@@ -181,6 +208,17 @@ input[type="text"] {
 .messages {
   margin: 0 auto;
   width: 400px;
+}
+
+.item-list {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.add-items input {
+  padding: 10px;
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .message {

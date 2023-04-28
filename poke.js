@@ -1,6 +1,5 @@
-let getLearnButton = document.querySelector("#learnButton");
+let getLoadButton = document.querySelector("#loadButton");
 let getSearchButton = document.getElementById("searchButton")
-
 
 let offsetPoke = 0;
 
@@ -22,7 +21,7 @@ let fetchKantoPokemon = (numberPoke = 6) => {
     });
 };
 
-getLearnButton.addEventListener("click", () => fetchKantoPokemon());
+getLoadButton.addEventListener("click", () => fetchKantoPokemon());
 
 function fetchPokemonData(pokemon) {
   let url = pokemon.url;

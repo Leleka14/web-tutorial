@@ -2,48 +2,56 @@ let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
 let resultInput = document.querySelector("input");
 
-addButton.addEventListener("click", (e) => resultMessage(e));
+addButton.addEventListener("click", (e) => resultMessages(e));
 
-function resultMessage(event) {
+
+
+let items = []
+
+function resultMessages(event) {
   console.log("event", event);
   if (resultInput.value.length < 5) {
     alert("Повідомлення закоротке!");
   } else {
-    let oldMessages = document.querySelectorAll(".message .button .buttonDel");
-    console.log("oldMessages", oldMessages);
-    const createdMessage = document.createElement("div");
-
-    const createdText = document.createElement("h2");
-    const editButton = document.createElement("button");
-    const deleteButton = document.createElement("button");
-    const lengthOldMessages = oldMessages.length + 1;
-
-    editButton.className = "button";
-    deleteButton.className = "button buttonDel";
-
-    createdText.textContent = resultInput.value;
-    // createdMessage.textContent = resultInput.value
-    editButton.textContent = "Edit";
-    deleteButton.textContent = "Delete";
-
-    deleteButton.id = lengthOldMessages;
-    editButton.id = lengthOldMessages;
-
-    createdMessage.className = "message"; //додаємо клас 'massage'
-    createdMessage.id = `message-${lengthOldMessages}`; //додаємо 'id'
-
-    createdText.className = "messageText";
-    createdText.id = `messageText-${lengthOldMessages}`;
-
-    createdMessage.appendChild(editButton);
-    createdMessage.appendChild(deleteButton);
-    createdMessage.appendChild(createdText);
-
-    deleteButton.addEventListener("click", deleteRow);
-    editButton.addEventListener("click", editRow);
-
-    messages.appendChild(createdMessage);
+    addItem()
   }
+}
+
+
+function addItem (e) {
+  let oldMessages = document.querySelectorAll(".message");
+  console.log("oldMessages", oldMessages);
+  const createdMessage = document.createElement("div");
+
+  const createdText = document.createElement("h2");
+  const editButton = document.createElement("button");
+  const deleteButton = document.createElement("button");
+  const lengthOldMessages = oldMessages.length + 1;
+
+  editButton.className = "button";
+  deleteButton.className = "button buttonDel";
+
+  createdText.textContent = resultInput.value;
+  editButton.textContent = "Edit";
+  deleteButton.textContent = "Delete";
+
+  deleteButton.id = lengthOldMessages;
+  editButton.id = lengthOldMessages;
+
+  createdMessage.className = "message"; //додаємо клас 'massage'
+  createdMessage.id = `message-${lengthOldMessages}`; //додаємо 'id'
+
+  createdText.className = "messageText";
+  createdText.id = `messageText-${lengthOldMessages}`;
+
+  createdMessage.appendChild(editButton);
+  createdMessage.appendChild(deleteButton);
+  createdMessage.appendChild(createdText);
+
+  deleteButton.addEventListener("click", deleteRow);
+  editButton.addEventListener("click", editRow);
+
+  messages.appendChild(createdMessage);
 }
 
 function deleteRow(e) {
