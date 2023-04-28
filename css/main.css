@@ -152,36 +152,7 @@ legend {
 }
 
 .buttonDel {
-  width: 50px;
-  height: 30px;
   background: red;
-}
-
-.buttonEdit {
-  width: 50px;
-  height: 30px;
-  background: #00ff37;
-}
-
-.items-list {
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 0;
-}
-
-.items-list li {
-  padding: 10px 0;
-  font-weight: 100;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 20px;
 }
 
 .divButton {

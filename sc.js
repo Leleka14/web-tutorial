@@ -1,24 +1,33 @@
 let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
-let resultInput = document.querySelector("input");
 
 addButton.addEventListener("click", (e) => resultMessages(e));
 
+let data = localStorage.getItem("msgList");
+let msgList = [];
 
-
-let items = []
+if (data !== "" && data !== null) {
+  msgList = JSON.parse(data);
+}
 
 function resultMessages(event) {
+  let msg = document.querySelector("input").value;
   console.log("event", event);
-  if (resultInput.value.length < 5) {
+  if (msg.length < 5) {
     alert("Повідомлення закоротке!");
   } else {
-    addItem()
+    const msgObj = {
+      msg: msg,
+    };
+    msgList.push(msgObj);
+    console.log(msgList);
+
+    localStorage.setItem("msgList", JSON.stringify(msgList));
+    createNewMsg(msgObj);
   }
 }
 
-
-function addItem (e) {
+function createNewMsg(obj) {
   let oldMessages = document.querySelectorAll(".message");
   console.log("oldMessages", oldMessages);
   const createdMessage = document.createElement("div");
@@ -31,7 +40,7 @@ function addItem (e) {
   editButton.className = "button";
   deleteButton.className = "button buttonDel";
 
-  createdText.textContent = resultInput.value;
+  createdText.textContent = obj.msg;
   editButton.textContent = "Edit";
   deleteButton.textContent = "Delete";
 
@@ -52,6 +61,10 @@ function addItem (e) {
   editButton.addEventListener("click", editRow);
 
   messages.appendChild(createdMessage);
+}
+
+for (const msg of msgList) {
+  createNewMsg(msg);
 }
 
 function deleteRow(e) {

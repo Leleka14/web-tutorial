@@ -13,6 +13,7 @@ function addItem(e) {
         text: text,
     }
 items.push(item)
+localStorage.setItem('items', JSON.stringify(items));
 displayItems(items, itemsList)
 
 this.reset()
