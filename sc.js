@@ -4,10 +4,22 @@ let addButton = document.querySelector("button");
 addButton.addEventListener("click", (e) => resultMessages(e));
 
 let data = localStorage.getItem("msgList");
+let dataDel = localStorage.getItem("msgDeleteList");
 let msgList = [];
+let msgDeleteList = [];
 
 if (data !== "" && data !== null) {
   msgList = JSON.parse(data);
+}
+
+if (dataDel !== "" && dataDel !== null) {
+  msgDeleteList = JSON.parse(dataDel);
+  console.log(msgDeleteList);
+  for (const n of msgDeleteList) {
+    deleteRow(n);
+    
+  }
+
 }
 
 function resultMessages(event) {
@@ -21,9 +33,9 @@ function resultMessages(event) {
     };
     msgList.push(msgObj);
     console.log(msgList);
-
-    localStorage.setItem("msgList", JSON.stringify(msgList));
     createNewMsg(msgObj);
+    localStorage.setItem("msgList", JSON.stringify(msgList));
+
   }
 }
 
@@ -40,7 +52,7 @@ function createNewMsg(obj) {
   editButton.className = "button";
   deleteButton.className = "button buttonDel";
 
-  createdText.textContent = obj.msg;
+  createdText.textContent = obj.msg; // = resultInput.value
   editButton.textContent = "Edit";
   deleteButton.textContent = "Delete";
 
@@ -63,18 +75,30 @@ function createNewMsg(obj) {
   messages.appendChild(createdMessage);
 }
 
+
+
 for (const msg of msgList) {
   createNewMsg(msg);
+  
 }
 
 function deleteRow(e) {
-  console.log("delete");
   //  (e)=>{
-  const messageToDelete = document.querySelector(`#message-${e.target.id}`);
-  console.log("messageToDelete", messageToDelete);
-  messages.removeChild(messageToDelete);
+  let nomerEl = e.target.id;
+  const messageToDelete = document.querySelector(`#message-${nomerEl}`);
+  // console.log("messageToDelete", messageToDelete);
+  console.log(nomerEl);
+
+  let msgDel = {
+    nomerEl: nomerEl,
+  };
+  msgDeleteList.push(msgDel);
+  console.log(msgDeleteList);
+
+  localStorage.setItem("msgDeleteList", JSON.stringify(msgDeleteList));
 
   // }
+  messages.removeChild(messageToDelete);
 }
 
 function editRow(e) {
