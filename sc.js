@@ -4,22 +4,12 @@ let addButton = document.querySelector("button");
 addButton.addEventListener("click", (e) => resultMessages(e));
 
 let data = localStorage.getItem("msgList");
-let dataDel = localStorage.getItem("msgDeleteList");
+
 let msgList = [];
-let msgDeleteList = [];
+
 
 if (data !== "" && data !== null) {
   msgList = JSON.parse(data);
-}
-
-if (dataDel !== "" && dataDel !== null) {
-  msgDeleteList = JSON.parse(dataDel);
-  console.log(msgDeleteList);
-  for (const n of msgDeleteList) {
-    deleteRow(n);
-    
-  }
-
 }
 
 function resultMessages(event) {
@@ -29,7 +19,8 @@ function resultMessages(event) {
     alert("Повідомлення закоротке!");
   } else {
     const msgObj = {
-      msg: msg,
+      id: Date.now(),
+      text: msg,
     };
     msgList.push(msgObj);
     console.log(msgList);
@@ -52,7 +43,7 @@ function createNewMsg(obj) {
   editButton.className = "button";
   deleteButton.className = "button buttonDel";
 
-  createdText.textContent = obj.msg; // = resultInput.value
+  createdText.textContent = obj.text; // = resultInput.value
   editButton.textContent = "Edit";
   deleteButton.textContent = "Delete";
 
@@ -61,6 +52,8 @@ function createNewMsg(obj) {
 
   createdMessage.className = "message"; //додаємо клас 'massage'
   createdMessage.id = `message-${lengthOldMessages}`; //додаємо 'id'
+  // Або через функцію дата
+  //createdMessage.id = obj.id
 
   createdText.className = "messageText";
   createdText.id = `messageText-${lengthOldMessages}`;
@@ -77,29 +70,40 @@ function createNewMsg(obj) {
 
 
 
-for (const msg of msgList) {
-  createNewMsg(msg);
+for (const text of msgList) {
+  createNewMsg(text);
   
 }
 
+
 function deleteRow(e) {
-  //  (e)=>{
-  let nomerEl = e.target.id;
-  const messageToDelete = document.querySelector(`#message-${nomerEl}`);
-  // console.log("messageToDelete", messageToDelete);
-  console.log(nomerEl);
 
-  let msgDel = {
-    nomerEl: nomerEl,
-  };
-  msgDeleteList.push(msgDel);
-  console.log(msgDeleteList);
+ //let nomerEl = e.target.id;
+ const messageToDelete = document.querySelector(`#message-${e.target.id}`);
+  console.log("messageToDelete", messageToDelete.id);
 
-  localStorage.setItem("msgDeleteList", JSON.stringify(msgDeleteList));
+const id = messageToDelete.id
 
-  // }
-  messages.removeChild(messageToDelete);
+
+msgList = msgList.filter((msg) => msg.id !== id)
+
+console.log(msgList)
+
+
+ messages.removeChild(messageToDelete);
 }
+
+
+// function deleteRow(e) {
+
+//  //let nomerEl = e.target.id;
+//  const messageToDelete = document.querySelector(`#message-${e.target.id}`);
+//   console.log("messageToDelete", messageToDelete);
+
+
+//  messages.removeChild(messageToDelete);
+// }
+
 
 function editRow(e) {
   const editMessage = prompt("Введіть зміни!");
