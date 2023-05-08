@@ -1,7 +1,6 @@
 let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
 
-
 addButton.addEventListener("click", (e) => resultMessages(e));
 
 let data = localStorage.getItem("msgList");
@@ -24,9 +23,8 @@ function resultMessages(event) {
     };
     msgList.push(msgObj);
     console.log(msgList);
-    saveToLocalStorage()
+    saveToLocalStorage();
     createNewMsg(msgObj);
- 
   }
 }
 
@@ -77,11 +75,11 @@ function deleteRow(e) {
   console.log(parenNode);
 
   const id = Number(parenNode.id);
-  
+  console.log(id);
   msgList = msgList.filter((msg) => msg.id !== id);
-  console.log(msgList)
+  console.log(msgList);
 
-  saveToLocalStorage()
+  saveToLocalStorage();
 
   parenNode.remove();
 }
@@ -91,18 +89,30 @@ function editRow(e) {
 
   if (editMessage) {
     console.log(editMessage);
-    const messageToEdit = document.querySelector(`#messageText-${e.target.id}`);
-    messageToEdit.innerHTML = editMessage;
+    const parenNode = e.target.closest(".message");
+
+    const msgTitle = parenNode.querySelector(".messageText");
+    console.log(parenNode);
+    console.log(msgTitle);
+
+    const id = Number(parenNode.id);
+    console.log(id);
+
+    const res = msgList.find(function (msg) {
+      if (msg.id === id) {
+        return (msg.text = editMessage);
+      }
+    });
+    console.log(msgList);
+
+    msgTitle.innerHTML = editMessage;
+    saveToLocalStorage();
   }
 }
-
 
 function saveToLocalStorage() {
   localStorage.setItem("msgList", JSON.stringify(msgList));
 }
-
-
-
 
 // createdMessage.textContent = resultInput.value
 // createdMessage.id = `message-${oldMessages.length}`
