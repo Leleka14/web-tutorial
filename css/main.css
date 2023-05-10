@@ -18,7 +18,6 @@ html {
 /* Reset and base styles  */
 * {
   padding: 0px;
-  margin: 0px;
   border: none;
 }
 
@@ -195,14 +194,29 @@ input[type="text"] {
 .message {
   gap: 20px;
   text-align: center;
+  display: -ms-grid;
+  display: grid;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.buttonsEditDelete {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   text-align: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  padding-top: 50px;
+  gap: 20px;
+}
+
+.divInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  gap: 20px;
 }
 
 #spinner:not([hidden]) {
@@ -455,5 +469,54 @@ img {
 
 .hide {
   display: none;
+}
+
+@media (max-width: 600px) {
+  .divInput {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: center;
+    width: 380px;
+    gap: 20px;
+    margin: 0 auto;
+  }
+  .messages {
+    margin: 0 auto;
+    width: 200px;
+  }
+  .button {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 36px;
+  }
+  .iputAdd {
+    width: 220px;
+    height: 40px;
+  }
+  .message {
+    gap: 20px;
+    text-align: center;
+    display: -ms-grid;
+    display: grid;
+    text-align: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .buttonsEditDelete {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: center;
+    gap: 20px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

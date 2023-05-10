@@ -38,6 +38,9 @@ function createNewMsg(obj) {
   const deleteButton = document.createElement("button");
   const lengthOldMessages = oldMessages.length + 1;
 
+  const divButtons = document.createElement("div")
+  divButtons.className = "buttonsEditDelete"
+
   editButton.className = "button";
   deleteButton.className = "button buttonDel";
 
@@ -56,9 +59,13 @@ function createNewMsg(obj) {
   createdText.className = "messageText";
   createdText.id = `messageText-${lengthOldMessages}`;
 
-  createdMessage.appendChild(editButton);
-  createdMessage.appendChild(deleteButton);
   createdMessage.appendChild(createdText);
+  divButtons.append(editButton, deleteButton)
+  createdMessage.append(divButtons);
+  
+  // createdMessage.appendChild();
+  // createdMessage.appendChild();
+  
 
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);

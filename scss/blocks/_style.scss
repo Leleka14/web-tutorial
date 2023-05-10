@@ -22,7 +22,7 @@
 .button {
   width: 200px;
   height: 50px;
-
+  
   background: rgb(123, 195, 123);
   box-shadow: 0px 10px 30px rgba(183, 50, 39, 0.2);
   border-radius: 30px;
@@ -77,10 +77,24 @@ input[type="text"] {
 .message {
   gap: 20px;
   text-align: center;
+  display: grid;
+  text-align: center;
+  //justify-content: space-between;
+  padding-top: 30px;
+}
+
+.buttonsEditDelete{
   display: flex;
   text-align: center;
-  justify-content: space-between;
-  padding-top: 50px;
+ gap: 20px;
+}
+
+.divInput{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+
 }
 
 #spinner:not([hidden]) {
