@@ -219,6 +219,10 @@ input[type="text"] {
   gap: 20px;
 }
 
+.message-text--selected {
+  color: #ff0808;
+}
+
 #spinner:not([hidden]) {
   position: fixed;
   top: 0;

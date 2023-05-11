@@ -97,6 +97,10 @@ input[type="text"] {
 
 }
 
+.message-text--selected{
+ color: #ff0808;
+}
+
 #spinner:not([hidden]) {
   position: fixed;
   top: 0;

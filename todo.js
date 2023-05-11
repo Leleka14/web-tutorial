@@ -20,6 +20,7 @@ function resultMessages(event) {
     const msgObj = {
       id: Date.now(),
       text: msg,
+      selected: false,
     };
     msgList.push(msgObj);
     console.log(msgList);
@@ -29,6 +30,10 @@ function resultMessages(event) {
 }
 
 function createNewMsg(obj) {
+  const cssClass = obj.selected
+    ? "messageText message-text--selected"
+    : "messageText";
+
   let oldMessages = document.querySelectorAll(".message");
   console.log("oldMessages", oldMessages);
   const createdMessage = document.createElement("div");
@@ -36,13 +41,18 @@ function createNewMsg(obj) {
   const createdText = document.createElement("h2");
   const editButton = document.createElement("button");
   const deleteButton = document.createElement("button");
+  const inputCheckbox = document.createElement("input");
   const lengthOldMessages = oldMessages.length + 1;
 
-  const divButtons = document.createElement("div")
-  divButtons.className = "buttonsEditDelete"
+  const divButtons = document.createElement("div");
+  divButtons.className = "buttonsEditDelete";
 
   editButton.className = "button";
   deleteButton.className = "button buttonDel";
+  inputCheckbox.classList.add("inputCheckbox");
+
+  inputCheckbox.type = "checkbox";
+  inputCheckbox.checked = obj.selected;
 
   createdText.textContent = obj.text; // = resultInput.value
   editButton.textContent = "Edit";
@@ -56,19 +66,21 @@ function createNewMsg(obj) {
   // Або через функцію дата
   createdMessage.id = obj.id;
 
-  createdText.className = "messageText";
+  //createdText.className = "messageText";
+
+  createdText.className = `${cssClass}`;
   createdText.id = `messageText-${lengthOldMessages}`;
 
   createdMessage.appendChild(createdText);
-  divButtons.append(editButton, deleteButton)
+  divButtons.append(editButton, deleteButton, inputCheckbox);
   createdMessage.append(divButtons);
-  
+
   // createdMessage.appendChild();
   // createdMessage.appendChild();
-  
 
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);
+  inputCheckbox.addEventListener("click", selectedRow);
 
   messages.appendChild(createdMessage);
 }
@@ -115,6 +127,41 @@ function editRow(e) {
     msgTitle.innerHTML = editMessage;
     saveToLocalStorage();
   }
+}
+
+function selectedRow(e) {
+  const parenNode = e.target.closest(".message");
+
+  const id = Number(parenNode.id);
+
+  // msgList.forEach((msg) => {
+  //   if (msg.id === id){
+  //     if(msg.selected===false){
+  //       msg.selected=true
+  //     }
+  //     else if(msg.selected===true){
+  //       msg.selected=false
+  //   }
+  // }
+  // })
+
+  const res = msgList.find(function (msg) {
+    if (msg.id === id) {
+      return true;
+    }
+  });
+
+  res.selected = !res.selected;
+  console.log(res);
+
+  console.log(msgList);
+
+  const msgCheckbox = parenNode.querySelector(".messageText");
+
+  console.log(msgCheckbox);
+  msgCheckbox.classList.toggle("message-text--selected");
+
+  saveToLocalStorage();
 }
 
 function saveToLocalStorage() {
