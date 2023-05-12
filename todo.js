@@ -145,6 +145,8 @@ function selectedRow(e) {
   // }
   // })
 
+
+
   const res = msgList.find(function (msg) {
     if (msg.id === id) {
       return true;
@@ -152,9 +154,12 @@ function selectedRow(e) {
   });
 
   res.selected = !res.selected;
-  console.log(res);
 
-  console.log(msgList);
+  msgList.sort(msg => msg.selected ? -1 : 1)
+
+
+  console.log("msgList",msgList);
+
 
   const msgCheckbox = parenNode.querySelector(".messageText");
 
