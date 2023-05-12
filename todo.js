@@ -131,10 +131,11 @@ function editRow(e) {
 
 function selectedRow(e) {
   const parenNode = e.target.closest(".message");
+  console.log(parenNode)
 
   const id = Number(parenNode.id);
 
-  // msgList.forEach((msg) => {
+  // let res = msgList.forEach((msg) => {
   //   if (msg.id === id){
   //     if(msg.selected===false){
   //       msg.selected=true
@@ -147,15 +148,24 @@ function selectedRow(e) {
 
 
 
+
+
+  // const res = msgList.find(function (msg) {
+  //   if (msg.id === id) {
+  //    // return true;
+  //    msg.selected = !m.selected;
+  //   }
+  // });
+
   const res = msgList.find(function (msg) {
     if (msg.id === id) {
-      return true;
+     return true;
     }
   });
 
   res.selected = !res.selected;
 
-  msgList.sort(msg => msg.selected ? -1 : 1)
+  msgList = msgList.sort((a,b) => b.selected-a.selected)
 
 
   console.log("msgList",msgList);
