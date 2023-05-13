@@ -21,11 +21,13 @@ function resultMessages(event) {
       id: Date.now(),
       text: msg,
       selected: false,
+     // important: false,
     };
     msgList.push(msgObj);
     console.log(msgList);
-    saveToLocalStorage();
+    
     createNewMsg(msgObj);
+    saveToLocalStorage();
   }
 }
 
@@ -130,46 +132,41 @@ function editRow(e) {
 }
 
 function selectedRow(e) {
+  
   const parenNode = e.target.closest(".message");
-  console.log(parenNode)
+  console.log(parenNode);
 
   const id = Number(parenNode.id);
 
-  // let res = msgList.forEach((msg) => {
-  //   if (msg.id === id){
-  //     if(msg.selected===false){
-  //       msg.selected=true
-  //     }
-  //     else if(msg.selected===true){
-  //       msg.selected=false
-  //   }
-  // }
-  // })
-
-
-
-
-
-  // const res = msgList.find(function (msg) {
-  //   if (msg.id === id) {
-  //    // return true;
-  //    msg.selected = !m.selected;
-  //   }
-  // });
-
   const res = msgList.find(function (msg) {
     if (msg.id === id) {
-     return true;
+      return true;
     }
   });
 
   res.selected = !res.selected;
+  console.log("res", res);
 
-  msgList = msgList.sort((a,b) => b.selected-a.selected)
+  msgList = msgList.sort((a, b) => b.selected - a.selected);
+
+  // let res = msgList.map((msg) => {
+  //   if (msg.id === id){
+  //     msg.selected = !msg.selected;
+  // }
+  // return msg
+  // })
+  // console.log("res", res);
+
+  // let res = msgList.forEach((msg) => {
+  //   if (msg.id === id){
+  //     msg.selected = !msg.selected;
+  // }
+  // })
+  // console.log("res", res);
 
 
-  console.log("msgList",msgList);
 
+  console.log("msgList", msgList);
 
   const msgCheckbox = parenNode.querySelector(".messageText");
 
@@ -178,6 +175,7 @@ function selectedRow(e) {
 
   saveToLocalStorage();
 }
+
 
 function saveToLocalStorage() {
   localStorage.setItem("msgList", JSON.stringify(msgList));
