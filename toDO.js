@@ -1,5 +1,3 @@
-// простий список todo
-
 let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
 
@@ -23,7 +21,6 @@ function resultMessages(event) {
       id: Date.now(),
       text: msg,
       selected: false,
-      // important: false,
     };
     msgList.push(msgObj);
     console.log(msgList);
@@ -39,19 +36,33 @@ function createNewMsg(obj) {
 
   let oldMessages = document.querySelectorAll(".message");
   console.log("oldMessages", oldMessages);
-  const createdMessage = document.createElement("div");
 
+  const createdMessage = document.createElement("div");
+  const createdTextDiv = document.createElement("div");
   const createdText = document.createElement("h2");
+  const dropdownDivConteiner = document.createElement("div");
+  const threeDotsDiv = document.createElement("div");
+  const dropdownDiv = document.createElement("div");
+
+  dropdownDivConteiner.className = "dropdown-container";
+  threeDotsDiv.className = "three-dots";
+  dropdownDiv.className = "dropdown";
+  createdTextDiv.className = "text-dots-div";
+  dropdownDivConteiner.tabIndex = "-1";
+
   const editButton = document.createElement("button");
   const deleteButton = document.createElement("button");
+  const editButtonDiv = document.createElement("div");
+  const deleteButtonDiv = document.createElement("div");
+
   const inputCheckbox = document.createElement("input");
   const lengthOldMessages = oldMessages.length + 1;
 
   const divButtons = document.createElement("div");
   divButtons.className = "buttonsEditDelete";
 
-  editButton.className = "button";
-  deleteButton.className = "button buttonDel";
+  editButton.className = "buttonDropdown";
+  deleteButton.className = "buttonDropdown";
   inputCheckbox.classList.add("inputCheckbox");
 
   inputCheckbox.type = "checkbox";
@@ -61,25 +72,23 @@ function createNewMsg(obj) {
   editButton.textContent = "Edit";
   deleteButton.textContent = "Delete";
 
-  deleteButton.id = lengthOldMessages;
-  editButton.id = lengthOldMessages;
+  deleteButtonDiv.id = lengthOldMessages;
+  editButtonDiv.id = lengthOldMessages;
 
   createdMessage.className = "message"; //додаємо клас 'massage'
-  // createdMessage.id = `message-${lengthOldMessages}`; //додаємо 'id'
-  // Або через функцію дата
   createdMessage.id = obj.id;
-
-  //createdText.className = "messageText";
 
   createdText.className = `${cssClass}`;
   createdText.id = `messageText-${lengthOldMessages}`;
 
-  createdMessage.appendChild(createdText);
-  divButtons.append(editButton, deleteButton, inputCheckbox);
-  createdMessage.append(divButtons);
+  editButtonDiv.append(editButton);
+  deleteButtonDiv.append(deleteButton);
+  dropdownDiv.append(editButtonDiv, deleteButtonDiv);
+  dropdownDivConteiner.append(threeDotsDiv, dropdownDiv);
+  createdTextDiv.append(createdText, dropdownDivConteiner);
 
-  // createdMessage.appendChild();
-  // createdMessage.appendChild();
+  divButtons.append(inputCheckbox);
+  createdMessage.append(createdTextDiv, divButtons);
 
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);
@@ -159,23 +168,6 @@ function selectedRow(e) {
     createNewMsg(text);
   }
 
-  // createNewMsg(res);
-
-  // let res = msgList.map((msg) => {
-  //   if (msg.id === id){
-  //     msg.selected = !msg.selected;
-  // }
-  // return msg
-  // })
-  // console.log("res", res);
-
-  // let res = msgList.forEach((msg) => {
-  //   if (msg.id === id){
-  //     msg.selected = !msg.selected;
-  // }
-  // })
-  // console.log("res", res);
-
   const msgCheckbox = parenNode.querySelector(".messageText");
 
   console.log("msgCheckbox", msgCheckbox);
@@ -187,35 +179,3 @@ function selectedRow(e) {
 function saveToLocalStorage() {
   localStorage.setItem("msgList", JSON.stringify(msgList));
 }
-
-// createdMessage.textContent = resultInput.value
-// createdMessage.id = `message-${oldMessages.length}`
-// createdMessage.className = 'message'
-// editButton.textContent = 'Edit'
-// deleteButton.textContent = 'Delete'
-// deleteButton.id = oldMessages.length
-
-// deleteButton.className = 'delete'
-// createdMessage.appendChild(editButton)
-// createdMessage.appendChild(deleteButton)
-
-// // deleteButton.addEventListener('click', function(){
-// //     console.log(resultInput.value)
-// // })
-
-// // createdDiv.innerHTML = `<div>
-// //   ${resultInput.value}
-// //   <button>Edit</button>
-// //   <button onclick="deleteRow()">Delete</button>
-// // </div>`
-
-// messages.appendChild(createdMessage);
-// deleteButton.addEventListener('click', (e)=>{
-//     const messageToDeleteId = e.target.id;
-//     const messageToDelete = document.querySelector(`#message-${messageToDeleteId}`)
-//     console.log(messageToDelete.childNodes[0].textContent)
-//     // messages.removeChild(messageToDelete)
-//     // messageToDelete
-//     // messageToDelete.remove()
-
-//  })
