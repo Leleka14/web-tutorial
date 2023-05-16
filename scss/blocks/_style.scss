@@ -338,6 +338,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 10px;
  
 }
 .three-dots:after {
@@ -348,14 +349,14 @@ img {
   padding: 0 5px;
 }
 
-a {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
-}
+// a {
+//   text-decoration: none;
+//   color: rgb(255, 255, 255);
+// }
 
-a div {
-  padding: 2px;
-}
+// a div {
+//   padding: 2px;
+// }
 
 .dropdown {
   width: 130px;
@@ -384,7 +385,7 @@ a div {
 }
 
 .buttonDropdown{
-
+  cursor: pointer;
     width: 120px;
     height: 40px;
     

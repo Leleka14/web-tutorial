@@ -386,6 +386,7 @@ img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding-left: 10px;
 }
 
 .three-dots:after {
@@ -394,15 +395,6 @@ img {
   content: '\2807';
   font-size: 40px;
   padding: 0 5px;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-}
-
-a div {
-  padding: 2px;
 }
 
 .dropdown {
@@ -433,6 +425,7 @@ a div {
 }
 
 .buttonDropdown {
+  cursor: pointer;
   width: 120px;
   height: 40px;
   background: #7bc37b;
