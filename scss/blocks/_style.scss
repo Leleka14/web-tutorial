@@ -22,7 +22,7 @@
 .button {
   width: 200px;
   height: 50px;
-  
+
   background: rgb(123, 195, 123);
   box-shadow: 0px 10px 30px rgba(183, 50, 39, 0.2);
   border-radius: 30px;
@@ -63,7 +63,7 @@ input[type="text"] {
   width: 700px;
 }
 
-.item-list{
+.item-list {
   margin: 0 auto;
   width: 400px;
 }
@@ -83,22 +83,21 @@ input[type="text"] {
   padding-top: 30px;
 }
 
-.buttonsEditDelete{
+.buttonsEditDelete {
   display: flex;
   text-align: center;
- gap: 20px;
+  gap: 20px;
 }
 
-.divInput{
+.divInput {
   display: flex;
   justify-content: center;
   text-align: center;
   gap: 20px;
-
 }
 
-.message-text--selected{
- color: #ff0808;
+.message-text--selected {
+  color: #ff0808;
 }
 
 #spinner:not([hidden]) {
@@ -132,7 +131,7 @@ input[type="text"] {
   }
 }
 
-.pokemon-row{
+.pokemon-row {
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
@@ -296,11 +295,11 @@ img {
   right: 10px;
 }
 
-.closePoke{
+.closePoke {
   display: none;
 }
 
-#search-container{
+#search-container {
   padding-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -331,20 +330,17 @@ img {
   display: none;
 }
 
-
-
-.text-dots-div{
+.text-dots-div {
   background-color: rgb(204, 204, 233);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 10px;
- 
 }
 .three-dots:after {
   cursor: pointer;
   color: rgb(0, 0, 0);
-  content: '\2807';
+  content: "\2807";
   font-size: 40px;
   padding: 0 5px;
 }
@@ -359,17 +355,17 @@ img {
 // }
 
 .dropdown {
-  width: 130px;
-  height: 80px;
- 
+  width: 200px;
+  height: 170px;
+
   position: absolute;
   right: auto;
-  background-color: #66D;
-  box-shadow: 0px 0px 3px 3px #66D;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 3px 3px rgb(71, 204, 67);
   outline: none;
   opacity: 0;
   z-index: -1;
-  
+
   transition: opacity 0.1s, z-index 0.1s, max-height 5s;
 }
 
@@ -384,19 +380,26 @@ img {
   transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
 }
 
-.buttonDropdown{
+.buttonDropdown {
+ margin-top: 10px;
   cursor: pointer;
-    width: 120px;
-    height: 40px;
-    
-     background: rgb(123, 195, 123);
-     //box-shadow: 0px 10px 30px rgba(183, 50, 39, 0.2);
-    // border-radius: 30px;
-     color: #fff;
-  
-    font-family: Montserrat;
-    font-size: 18px;
-    font-weight: 500;
-    
+  width: 180px;
+  height: 40px;
 
+  background: rgb(123, 195, 123);
+  //box-shadow: 0px 10px 30px rgba(183, 50, 39, 0.2);
+  // border-radius: 30px;
+  color: #fff;
+
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
 }
+
+  dialog {
+  background: rgba(255, 255, 255, 0.7);
+  width: 300px; 
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  
+ }

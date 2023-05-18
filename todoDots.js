@@ -1,7 +1,11 @@
 let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
+let msg = document.querySelector("input");
+const dialog = document.querySelector("dialog");
+const closeButton = document.querySelector("#closeDialog");
 
 addButton.addEventListener("click", (e) => resultMessages(e));
+closeButton.addEventListener("click", dialogCloseModal);
 
 let data = localStorage.getItem("msgList");
 
@@ -12,14 +16,13 @@ if (data !== "" && data !== null) {
 }
 
 function resultMessages(event) {
-  let msg = document.querySelector("input").value;
   console.log("event", event);
-  if (msg.length < 5) {
+  if (msg.value.length < 5) {
     alert("Повідомлення закоротке!");
   } else {
     const msgObj = {
       id: Date.now(),
-      text: msg,
+      text: msg.value,
       selected: false,
     };
     msgList.push(msgObj);
@@ -27,6 +30,9 @@ function resultMessages(event) {
     createNewMsg(msgObj);
     saveToLocalStorage();
   }
+
+  msg.value = "";
+  msg.focus();
 }
 
 function createNewMsg(obj) {
@@ -52,9 +58,14 @@ function createNewMsg(obj) {
 
   const editButton = document.createElement("button");
   const deleteButton = document.createElement("button");
+  const attachButton = document.createElement("button");
   const editButtonDiv = document.createElement("div");
   const deleteButtonDiv = document.createElement("div");
+  const attachButtonDiv = document.createElement("div");
+  //const dialog = document.createElement("dialog");
+  // const dialog = document.querySelector("dialog");
 
+  attachButton.id = "openDialog";
   const inputCheckbox = document.createElement("input");
   const lengthOldMessages = oldMessages.length + 1;
 
@@ -63,6 +74,9 @@ function createNewMsg(obj) {
 
   editButton.className = "buttonDropdown";
   deleteButton.className = "buttonDropdown";
+  attachButton.className = "buttonDropdown";
+  // dialog.className = "dialog"
+  // dialog.id = "myDialog"
   inputCheckbox.classList.add("inputCheckbox");
 
   inputCheckbox.type = "checkbox";
@@ -71,6 +85,8 @@ function createNewMsg(obj) {
   createdText.textContent = obj.text; // = resultInput.value
   editButton.textContent = "Edit";
   deleteButton.textContent = "Delete";
+  attachButton.textContent = "Attach Label";
+  //dialog.textContent = obj.text;
 
   deleteButtonDiv.id = lengthOldMessages;
   editButtonDiv.id = lengthOldMessages;
@@ -81,9 +97,12 @@ function createNewMsg(obj) {
   createdText.className = `${cssClass}`;
   createdText.id = `messageText-${lengthOldMessages}`;
 
+  //attachButtonDiv.append(dialog)
   editButtonDiv.append(editButton);
   deleteButtonDiv.append(deleteButton);
-  dropdownDiv.append(editButtonDiv, deleteButtonDiv);
+  attachButtonDiv.append(attachButton, dialog);
+  //attachButtonDiv.append(attachButton)
+  dropdownDiv.append(editButtonDiv, deleteButtonDiv, attachButtonDiv);
   dropdownDivConteiner.append(threeDotsDiv, dropdownDiv);
   createdTextDiv.append(createdText, dropdownDivConteiner);
 
@@ -92,6 +111,8 @@ function createNewMsg(obj) {
 
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);
+  attachButton.addEventListener("click", dialogShowModal);
+
   inputCheckbox.addEventListener("click", selectedRow);
 
   messages.appendChild(createdMessage);
@@ -175,6 +196,24 @@ function selectedRow(e) {
 
   saveToLocalStorage();
 }
+
+function dialogShowModal(e) {
+  dialog.showModal();
+}
+
+function dialogCloseModal(e) {
+  dialog.close();
+}
+
+// function dialogShowModal(e) {
+//   const parenNode = e.target.closest(".message");
+//   console.log(parenNode);
+//   const openDialog = parenNode.querySelector("dialog");
+//   //let dialog = document.querySelector('dialog');
+
+//   console.log(openDialog);
+//   openDialog.showModal();
+// }
 
 function saveToLocalStorage() {
   localStorage.setItem("msgList", JSON.stringify(msgList));

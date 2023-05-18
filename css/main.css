@@ -392,19 +392,19 @@ img {
 .three-dots:after {
   cursor: pointer;
   color: black;
-  content: '\2807';
+  content: "\2807";
   font-size: 40px;
   padding: 0 5px;
 }
 
 .dropdown {
-  width: 130px;
-  height: 80px;
+  width: 200px;
+  height: 170px;
   position: absolute;
   right: auto;
-  background-color: #66D;
-  -webkit-box-shadow: 0px 0px 3px 3px #66D;
-          box-shadow: 0px 0px 3px 3px #66D;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 3px 3px #47cc43;
+          box-shadow: 0px 0px 3px 3px #47cc43;
   outline: none;
   opacity: 0;
   z-index: -1;
@@ -425,14 +425,23 @@ img {
 }
 
 .buttonDropdown {
+  margin-top: 10px;
   cursor: pointer;
-  width: 120px;
+  width: 180px;
   height: 40px;
   background: #7bc37b;
   color: #fff;
   font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
+}
+
+dialog {
+  background: rgba(255, 255, 255, 0.7);
+  width: 300px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
 }
 
 @media (max-width: 600px) {
