@@ -111,23 +111,34 @@
           </div>
 
           <div class="messages">
-            <dialog>
-              <label>
-                <p>Chores</p>
+
+            <dialog class="dialogDiv">
+              <label for="choresButton" >
+                <p>
+                  <button id="choresButton" class="buttonLabel" type="button">
+                    Chores
+                  </button>
+                
               </label>
-              <label>
-                <p>Shopping</p>
+              <label for="shoppingButton" >
+                <p>
+                  <button id="shoppingButton" class="buttonLabel" type="button">Shopping</button>
+                </p>
               </label>
-              <label>
-                <p>Work</p>
+              <label for="workButton" >
+                <p><button id="workButton" class="buttonLabel" type="button">Work</button></p>
               </label>
-              <p><button id="closeDialog">Закрити вікно</button></p>
+              <p>
+                <button class="buttonLabel" id="closeDialog">
+                  Закрити вікно
+                </button>
+              </p>
             </dialog>
           </div>
         </div>
       </section>
     </main>
 
-    <script type="text/javascript" src="todoDots.js"></script>
+    <script type="text/javascript" src="todoModel.js"></script>
   </body>
 </html>

@@ -2,13 +2,13 @@ let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
 let msg = document.querySelector("input");
 const dialog = document.querySelector("dialog");
-const closeButton = document.querySelector("#closeDialog");
+//const closeButton = document.querySelector("#closeDialog");
 
 // const addLabel = document.querySelector(".addLabel");
 // console.log('addLabel', addLabel)
 
 addButton.addEventListener("click", (e) => resultMessages(e));
-closeButton.addEventListener("click", dialogCloseModal);
+//closeButton.addEventListener("click", dialogCloseModal);
 
 let data = localStorage.getItem("msgList");
 
@@ -45,7 +45,7 @@ function createNewMsg(obj) {
 
   let oldMessages = document.querySelectorAll(".message");
   console.log("oldMessages", oldMessages);
-
+ // const dialog = document.querySelector("dialog");
   const createdMessage = document.createElement("div");
   const createdTextDiv = document.createElement("div");
   const createdText = document.createElement("h2");
@@ -79,9 +79,8 @@ function createNewMsg(obj) {
   editButton.className = "buttonDropdown";
   deleteButton.className = "buttonDropdown";
   attachButton.className = "buttonDropdown";
-  addLabelDiv.className = "addLabel"
-  // dialog.className = "dialog"
-  // dialog.id = "myDialog"
+  addLabelDiv.className = "addLabel";
+
   inputCheckbox.classList.add("inputCheckbox");
 
   inputCheckbox.type = "checkbox";
@@ -91,7 +90,6 @@ function createNewMsg(obj) {
   editButton.textContent = "Edit";
   deleteButton.textContent = "Delete";
   attachButton.textContent = "Attach Label";
-  //dialog.textContent = obj.text;
 
   deleteButtonDiv.id = lengthOldMessages;
   editButtonDiv.id = lengthOldMessages;
@@ -102,37 +100,65 @@ function createNewMsg(obj) {
   createdText.className = `${cssClass}`;
   createdText.id = `messageText-${lengthOldMessages}`;
 
-  //attachButtonDiv.append(dialog)
-  addLabelDiv.append(addLabel)
+  addLabelDiv.append(addLabel);
   editButtonDiv.append(editButton);
   deleteButtonDiv.append(deleteButton);
-  attachButtonDiv.append(attachButton, dialog);
-  //attachButtonDiv.append(attachButton)
+  attachButtonDiv.append(attachButton);
+
   dropdownDiv.append(editButtonDiv, deleteButtonDiv, attachButtonDiv);
   dropdownDivConteiner.append(threeDotsDiv, dropdownDiv);
-  createdTextDiv.append(createdText,addLabelDiv, dropdownDivConteiner);
+  createdTextDiv.append(createdText, addLabelDiv, dropdownDivConteiner);
 
   divButtons.append(inputCheckbox);
-  createdMessage.append(createdTextDiv, divButtons);
+  createdMessage.append(createdTextDiv, divButtons, dialog);
 
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);
-  attachButton.addEventListener("click", dialogShowModal);
+ // attachButton.addEventListener("click", dialogCreateModal);
+ attachButtonDiv.addEventListener("click", (e) => {
+    dialogCreateModal()
+ });
 
   inputCheckbox.addEventListener("click", selectedRow);
 
   messages.appendChild(createdMessage);
 }
 
-const buttonChores = document.querySelector(".buttonChores");
-buttonChores.addEventListener("click", addTask);
+function dialogCreateModal(e) {
+    console.log('sdfsdfsdf')
 
-function addTask(e) {
-  const parenNode = e.target.closest(".message");
-  console.log(parenNode);
- 
-  console.log("mfglfaasfgfdg");
+    const buttonChores = document.querySelector("#choresButton")
+    const buttonShopping = document.querySelector("#shoppingButton")
+    const buttonWork = document.querySelector("#workButton")
+    const closeButton = document.querySelector("#closeDialog");
+
+   dialog.showModal();
+
+
+   buttonChores.addEventListener("click", addChores);
+
+
+   closeButton.addEventListener("click", () => dialog.close());
+
 }
+
+// const buttonChores = document.querySelector(".buttonChores");
+// buttonChores.addEventListener("click", addTask);
+
+function addChores(e) {
+    let addLabelChores = document.querySelector(".addLabel")
+    let labelChoresId = document.querySelector("#choresButton")
+    addLabelChores.textContent = labelChoresId.textContent
+
+
+  console.log(addLabelChores);
+}
+
+
+
+// function dialogCloseModal(e) {
+//   dialog.close();
+// }
 
 for (const text of msgList) {
   createNewMsg(text);
@@ -212,24 +238,6 @@ function selectedRow(e) {
 
   saveToLocalStorage();
 }
-
-function dialogShowModal(e) {
-  dialog.showModal();
-}
-
-function dialogCloseModal(e) {
-  dialog.close();
-}
-
-// function dialogShowModal(e) {
-//   const parenNode = e.target.closest(".message");
-//   console.log(parenNode);
-//   const openDialog = parenNode.querySelector("dialog");
-//   //let dialog = document.querySelector('dialog');
-
-//   console.log(openDialog);
-//   openDialog.showModal();
-// }
 
 function saveToLocalStorage() {
   localStorage.setItem("msgList", JSON.stringify(msgList));
