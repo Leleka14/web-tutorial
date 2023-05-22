@@ -1,7 +1,8 @@
 let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
 let msg = document.querySelector("input");
-const dialog = document.querySelector("dialog");
+
+//const dialog = document.querySelector("dialog");
 //const closeButton = document.querySelector("#closeDialog");
 
 // const addLabel = document.querySelector(".addLabel");
@@ -45,7 +46,7 @@ function createNewMsg(obj) {
 
   let oldMessages = document.querySelectorAll(".message");
   console.log("oldMessages", oldMessages);
- // const dialog = document.querySelector("dialog");
+  // const dialog = document.querySelector("dialog");
   const createdMessage = document.createElement("div");
   const createdTextDiv = document.createElement("div");
   const createdText = document.createElement("h2");
@@ -110,51 +111,78 @@ function createNewMsg(obj) {
   createdTextDiv.append(createdText, addLabelDiv, dropdownDivConteiner);
 
   divButtons.append(inputCheckbox);
-  createdMessage.append(createdTextDiv, divButtons, dialog);
+  createdMessage.append(createdTextDiv, divButtons);
 
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);
- // attachButton.addEventListener("click", dialogCreateModal);
- attachButtonDiv.addEventListener("click", (e) => {
-    dialogCreateModal()
- });
+  threeDotsDiv.addEventListener("click", elementRow);
+  // attachButton.addEventListener("click", dialogCreateModal);
+  //  attachButtonDiv.addEventListener("click", () => {
+  //     dialogCreateModal()
+  //  });
 
   inputCheckbox.addEventListener("click", selectedRow);
 
   messages.appendChild(createdMessage);
 }
 
-function dialogCreateModal(e) {
-    console.log('sdfsdfsdf')
+function elementRow(e) {
+  const parenNode = e.target.closest(".message");
+  console.log(parenNode);
 
-    const buttonChores = document.querySelector("#choresButton")
-    const buttonShopping = document.querySelector("#shoppingButton")
-    const buttonWork = document.querySelector("#workButton")
-    const closeButton = document.querySelector("#closeDialog");
+  let attachButtonDiv = parenNode.querySelector("#openDialog");
+  console.log(attachButtonDiv);
 
-   dialog.showModal();
+  attachButtonDiv.addEventListener("click", () => {
+    dialogCreateModal();
+  });
 
+  let addLabel = parenNode.querySelector(".addLabel");
 
-   buttonChores.addEventListener("click", addChores);
+  console.log("addLabel", addLabel);
 
+  const buttonChores = document.querySelector("#choresButton");
+  const buttonShopping = document.querySelector("#shoppingButton");
+  const buttonWork = document.querySelector("#workButton");
 
-   closeButton.addEventListener("click", () => dialog.close());
+  buttonChores.addEventListener("click", (e) => {
+    let chores = buttonChores.textContent;
 
+    addLabel.textContent = chores;
+  });
+
+  buttonShopping.addEventListener("click", (e) => {
+    addLabel.textContent = buttonShopping.textContent;
+  });
+
+  // buttonWork.addEventListener("click", () => {
+  //   addLabelChores.textContent = buttonWork.textContent;
+  // });
+
+  // console.log(addLabelChores);
+
+  //addLabelDiv.append(addLabel);
 }
 
-// const buttonChores = document.querySelector(".buttonChores");
-// buttonChores.addEventListener("click", addTask);
+function dialogCreateModal() {
+  const dialog = document.querySelector("dialog");
+  console.log("sdfsdfsdf");
 
-function addChores(e) {
-    let addLabelChores = document.querySelector(".addLabel")
-    let labelChoresId = document.querySelector("#choresButton")
-    addLabelChores.textContent = labelChoresId.textContent
+  const closeButton = document.querySelector("#closeDialog");
 
+  dialog.showModal();
 
-  console.log(addLabelChores);
+  closeButton.addEventListener("click", () => dialog.close());
 }
 
+// function addChores(e) {
 
+//     let addLabelChores = document.querySelector(".addLabel")
+//     let labelChoresId = document.querySelector("#choresButton")
+//     addLabelChores.textContent = labelChoresId.textContent
+
+//   console.log(addLabelChores);
+// }
 
 // function dialogCloseModal(e) {
 //   dialog.close();
