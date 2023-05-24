@@ -27,6 +27,7 @@ function resultMessages(event) {
       id: Date.now(),
       text: msg.value,
       selected: false,
+     
     };
     msgList.push(msgObj);
     console.log(msgList);
@@ -99,6 +100,8 @@ function createNewMsg(obj) {
   createdMessage.className = "message"; //додаємо клас 'massage'
   createdMessage.id = obj.id;
 
+  threeDotsDiv.id = `dots-${obj.id}`;
+
   createdText.className = `${cssClass}`;
   createdText.id = `messageText-${lengthOldMessages}`;
 
@@ -118,21 +121,23 @@ function createNewMsg(obj) {
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);
   attachButton.addEventListener("click", dialogShowModal);
+  //threeDotsDiv.addEventListener("click", elementRow)
 
   inputCheckbox.addEventListener("click", selectedRow);
 
   messages.appendChild(createdMessage);
 }
 
-const buttonChores = document.querySelector(".buttonChores");
-buttonChores.addEventListener("click", addTask);
 
-function addTask(e) {
-  const parenNode = e.target.closest(".message");
-  console.log(parenNode);
- 
-  console.log("mfglfaasfgfdg");
-}
+// function elementRow (e) {
+//   const parenNode = document.querySelector(`#dots-${e.target.id}`);
+
+//   console.log(parenNode);
+// }
+
+
+
+console.log("msgList", msgList)
 
 for (const text of msgList) {
   createNewMsg(text);

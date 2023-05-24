@@ -2,12 +2,6 @@ let messages = document.querySelector(".messages");
 let addButton = document.querySelector("button");
 let msg = document.querySelector("input");
 
-//const dialog = document.querySelector("dialog");
-//const closeButton = document.querySelector("#closeDialog");
-
-// const addLabel = document.querySelector(".addLabel");
-// console.log('addLabel', addLabel)
-
 addButton.addEventListener("click", (e) => resultMessages(e));
 //closeButton.addEventListener("click", dialogCloseModal);
 
@@ -28,10 +22,13 @@ function resultMessages(event) {
       id: Date.now(),
       text: msg.value,
       selected: false,
+      label: "",
     };
+
     msgList.push(msgObj);
-    console.log(msgList);
+    console.log("msgList", msgList);
     createNewMsg(msgObj);
+
     saveToLocalStorage();
   }
 
@@ -116,76 +113,113 @@ function createNewMsg(obj) {
   deleteButton.addEventListener("click", deleteRow);
   editButton.addEventListener("click", editRow);
   threeDotsDiv.addEventListener("click", elementRow);
-  // attachButton.addEventListener("click", dialogCreateModal);
-  //  attachButtonDiv.addEventListener("click", () => {
-  //     dialogCreateModal()
-  //  });
+
+  // //Додайте обробник події до елементу <label>
+  // addLabel.addEventListener("click", function() {
+  //   addLabelFunc(addLabel.textContent);
+  // });
 
   inputCheckbox.addEventListener("click", selectedRow);
 
   messages.appendChild(createdMessage);
 }
 
+let chosenElementId;
+
 function elementRow(e) {
   const parenNode = e.target.closest(".message");
   console.log(parenNode);
+
+  chosenElementId = parenNode.id;
+
+  console.log("chosenElementId", chosenElementId);
 
   let attachButtonDiv = parenNode.querySelector("#openDialog");
   console.log(attachButtonDiv);
 
   attachButtonDiv.addEventListener("click", () => {
-    dialogCreateModal();
+    openLabelModal();
   });
-
-  let addLabel = parenNode.querySelector(".addLabel");
-
-  console.log("addLabel", addLabel);
-
-  const buttonChores = document.querySelector("#choresButton");
-  const buttonShopping = document.querySelector("#shoppingButton");
-  const buttonWork = document.querySelector("#workButton");
-
-  buttonChores.addEventListener("click", (e) => {
-    let chores = buttonChores.textContent;
-
-    addLabel.textContent = chores;
-  });
-
-  buttonShopping.addEventListener("click", (e) => {
-    addLabel.textContent = buttonShopping.textContent;
-  });
-
-  // buttonWork.addEventListener("click", () => {
-  //   addLabelChores.textContent = buttonWork.textContent;
-  // });
-
-  // console.log(addLabelChores);
-
-  //addLabelDiv.append(addLabel);
 }
 
-function dialogCreateModal() {
-  const dialog = document.querySelector("dialog");
-  console.log("sdfsdfsdf");
+// const labelButtons = document.querySelectorAll(".buttonLabel");
 
-  const closeButton = document.querySelector("#closeDialog");
+// console.log("labelButtons", labelButtons)
+// labelButtons.forEach((button) => {
+//   button.addEventListener("click", addLabelToMessage);
+// });
 
-  dialog.showModal();
+// function addLabelToMessage(event) {
+//   const selectedMessage = document.getElementById(chosenElementId);
+//   if (selectedMessage) {
+//     const addLabel = selectedMessage.querySelector(".addLabel");
+//     const labelText = event.target.textContent;
 
-  closeButton.addEventListener("click", () => dialog.close());
-}
+//     console.log("labelText", labelText)
+//     addLabel.textContent += `${labelText}`;
 
-// function addChores(e) {
+//     const id = Number(selectedMessage.id);
+//       const res = msgList.find((msg) => msg.id === id);
+//       res.label = labelText;
 
-//     let addLabelChores = document.querySelector(".addLabel")
-//     let labelChoresId = document.querySelector("#choresButton")
-//     addLabelChores.textContent = labelChoresId.textContent
-
-//   console.log(addLabelChores);
+//     saveToLocalStorage(); // Збереження змін у localStorage
+//     closeLabelModal();
+//   }
 // }
 
-// function dialogCloseModal(e) {
-//   dialog.close();
+function addLabelFunc(label) {
+  const selectedMessage = document.getElementById(chosenElementId);
+
+  console.log("selectedMessage", selectedMessage);
+
+  const addLabel = selectedMessage.querySelector(".addLabel");
+  addLabel.textContent = label;
+
+  const id = Number(selectedMessage.id);
+  const res = msgList.find((msg) => msg.id === id);
+  res.label = label;
+
+  saveToLocalStorage();
+}
+
+const buttonChores = document.querySelector("#choresButton");
+const buttonShopping = document.querySelector("#shoppingButton");
+const buttonWork = document.querySelector("#workButton");
+
+buttonChores.addEventListener("click", (e) => {
+  addLabelFunc("Chores");
+});
+
+buttonShopping.addEventListener("click", (e) => {
+  addLabelFunc("Shopping");
+});
+
+buttonWork.addEventListener("click", (e) => {
+  addLabelFunc("Work");
+});
+
+function openLabelModal() {
+  const dialog = document.querySelector("dialog");
+  dialog.showModal();
+}
+
+const closeButton = document.querySelector("#closeDialog");
+closeButton.addEventListener("click", closeLabelModal);
+
+function closeLabelModal() {
+  const dialog = document.querySelector("dialog");
+  dialog.close();
+}
+
+// function dialogCreateModal() {
+//   const dialog = document.querySelector("dialog");
+//   console.log("sdfsdfsdf");
+
+//   const closeButton = document.querySelector("#closeDialog");
+
+//   dialog.showModal();
+
+//   closeButton.addEventListener("click", () => dialog.close());
 // }
 
 for (const text of msgList) {
