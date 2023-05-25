@@ -84,6 +84,8 @@ function createNewMsg(obj) {
   inputCheckbox.type = "checkbox";
   inputCheckbox.checked = obj.selected;
 
+  addLabel.textContent = obj.label;
+
   createdText.textContent = obj.text; // = resultInput.value
   editButton.textContent = "Edit";
   deleteButton.textContent = "Delete";
@@ -173,6 +175,7 @@ function addLabelFunc(label) {
   console.log("selectedMessage", selectedMessage);
 
   const addLabel = selectedMessage.querySelector(".addLabel");
+
   addLabel.textContent = label;
 
   const id = Number(selectedMessage.id);
@@ -180,6 +183,7 @@ function addLabelFunc(label) {
   res.label = label;
 
   saveToLocalStorage();
+  closeLabelModal();
 }
 
 const buttonChores = document.querySelector("#choresButton");
